@@ -3,625 +3,542 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ingedás · Servicio Energético para Establecimientos SICTED</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Ingedás · Estudio Eléctrico · María Cristina Ramírez Díaz</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --ink: #1a1a2e;
-    --ink-mid: #3d3d5c;
-    --ink-light: #7a7a99;
-    --gold: #c8a96e;
-    --gold-light: #e8d5a8;
-    --green: #2d6a4f;
-    --green-light: #e8f5ef;
-    --cream: #faf8f3;
-    --white: #ffffff;
-    --border: #e8e4da;
+    --yellow:      #fcdb50;
+    --blue:        #1e3f6e;
+    --blue-mid:    #3a6ca8;
+    --blue-pale:   #eaf0f8;
+    --blue-dark:   #0d1f38;
+    --green:       #1f9e5c;
+    --amber:       #d4820a;
+    --amber-pale:  #fef6e4;
+    --warm-light:  #f5f3ee;
+    --warm-mid:    #e2dfd8;
+    --warm-dark:   #c8c4bc;
+    --text:        #1c2433;
+    --text-soft:   #5a6475;
+    --white:       #ffffff;
   }
+  body { font-family:'Montserrat',sans-serif; font-weight:300; color:var(--text); background:var(--white); line-height:1.6; }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
-    color: var(--ink);
-    font-weight: 300;
-    line-height: 1.7;
-    min-height: 100vh;
+  /* ══ PORTADA ══ */
+  .cover {
+    background: linear-gradient(150deg,#2e5fa3 0%,#1e3f6e 38%,#0f2240 72%,#0a1726 100%);
+    width:100%; height:100vh;
+    display:flex; flex-direction:column; justify-content:space-between;
+    padding:48px 56px; position:relative; overflow:hidden;
+    page-break-after:always;
   }
+  .cover::before { content:''; position:absolute; top:0; left:0; width:5px; height:100%; background:linear-gradient(to bottom,var(--yellow),rgba(252,219,80,0.15)); }
+  .cover-glow  { position:absolute; top:-120px; right:-80px; width:480px; height:480px; background:radial-gradient(circle,rgba(58,108,168,0.35) 0%,transparent 70%); pointer-events:none; }
+  .cover-glow2 { position:absolute; bottom:-60px; left:80px; width:300px; height:300px; background:radial-gradient(circle,rgba(31,158,92,0.08) 0%,transparent 70%); pointer-events:none; }
+  .cover-dots  { position:absolute; top:72px; right:56px; display:grid; grid-template-columns:repeat(7,1fr); gap:11px; opacity:0.09; pointer-events:none; }
+  .cover-dots span { width:3px; height:3px; background:var(--white); border-radius:50%; display:block; }
+  .cover-brand { display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px solid rgba(255,255,255,0.10); padding-bottom:14px; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.35); position:relative; z-index:1; }
+  .cover-brand .brand-name { color:var(--yellow); font-weight:600; letter-spacing:3px; }
+  .cover-body  { margin:auto 0; position:relative; z-index:1; }
+  .cover-eyebrow { font-size:11px; letter-spacing:4px; text-transform:uppercase; color:rgba(252,219,80,0.75); margin-bottom:22px; font-weight:500; display:flex; align-items:center; gap:12px; }
+  .cover-eyebrow::before { content:''; display:inline-block; width:32px; height:1.5px; background:rgba(252,219,80,0.6); flex-shrink:0; }
+  .cover-title { font-size:clamp(60px,9.5vw,108px); font-weight:300; letter-spacing:-2.5px; line-height:0.93; color:var(--white); }
+  .cover-title strong { font-weight:700; background:linear-gradient(90deg,#ffffff 0%,#fcdb50 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .cover-subtitle { font-size:11px; font-weight:400; margin-top:18px; color:rgba(255,255,255,0.35); letter-spacing:3.5px; text-transform:uppercase; }
+  .cover-client-box { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.10); border-left:3px solid rgba(252,219,80,0.6); border-radius:10px; padding:22px 28px; margin-top:44px; display:inline-block; }
+  .cover-client-box .label { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:rgba(252,219,80,0.6); margin-bottom:6px; }
+  .cover-client-box .client-name { font-size:23px; font-weight:600; color:var(--white); line-height:1.2; }
+  .cover-client-box .client-meta { font-size:12px; color:rgba(255,255,255,0.38); margin-top:5px; }
+  .cover-pills { display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; }
+  .cover-pill  { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius:20px; padding:4px 13px; font-size:10px; letter-spacing:0.5px; color:rgba(255,255,255,0.5); }
+  .cover-pill.accent { background:rgba(252,219,80,0.10); border-color:rgba(252,219,80,0.30); color:rgba(252,219,80,0.85); }
 
-  .page {
-    max-width: 760px;
-    margin: 0 auto;
-    background: var(--white);
-    box-shadow: 0 4px 40px rgba(0,0,0,0.07);
-  }
+  /* caja resumen ahorro portada */
+  .cover-savings { display:flex; gap:16px; margin-top:28px; }
+  .cs-box { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.10); border-radius:8px; padding:14px 20px; flex:1; }
+  .cs-label { font-size:8px; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:4px; }
+  .cs-value { font-size:22px; font-weight:700; color:var(--yellow); line-height:1; }
+  .cs-sub   { font-size:9px; color:rgba(255,255,255,0.28); margin-top:3px; }
+  .cs-box.green .cs-value { color:#4fe69a; }
 
-  /* HEADER */
-  .header {
-    background: var(--ink);
-    padding: 52px 56px 44px;
-    position: relative;
-    overflow: hidden;
-  }
-  .header::before {
-    content: '';
-    position: absolute;
-    top: -60px; right: -60px;
-    width: 280px; height: 280px;
-    border-radius: 50%;
-    border: 1px solid rgba(200,169,110,0.2);
-  }
-  .header::after {
-    content: '';
-    position: absolute;
-    top: -20px; right: -20px;
-    width: 160px; height: 160px;
-    border-radius: 50%;
-    border: 1px solid rgba(200,169,110,0.12);
-  }
-  .logo-line {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 32px;
-  }
-  .logo-dot {
-    width: 8px; height: 8px;
-    background: var(--gold);
-    border-radius: 50%;
-  }
-  .logo-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    color: var(--white);
-    letter-spacing: 0.02em;
-  }
-  .logo-sub {
-    font-size: 11px;
-    color: var(--gold-light);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-weight: 400;
-  }
-  .header-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 34px;
-    color: var(--white);
-    font-weight: 400;
-    line-height: 1.25;
-    margin-bottom: 12px;
-  }
-  .header-title em {
-    font-style: normal;
-    color: var(--gold);
-  }
-  .header-sub {
-    font-size: 13px;
-    color: rgba(255,255,255,0.55);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-weight: 400;
-  }
+  .cover-footer { border-top:1px solid rgba(255,255,255,0.08); padding-top:14px; display:flex; justify-content:space-between; font-size:11px; color:rgba(255,255,255,0.25); position:relative; z-index:1; }
+  .cover-watermark { position:absolute; right:-20px; bottom:-10px; font-size:200px; font-weight:700; color:rgba(255,255,255,0.025); line-height:1; writing-mode:vertical-rl; letter-spacing:-8px; pointer-events:none; user-select:none; }
 
-  /* INTRO */
-  .intro {
-    padding: 40px 56px 36px;
-    border-bottom: 1px solid var(--border);
-  }
-  .intro p {
-    font-size: 15px;
-    color: var(--ink-mid);
-    line-height: 1.85;
-  }
-  .intro p strong {
-    color: var(--ink);
-    font-weight: 500;
-  }
+  /* ══ PÁGINA INTERIOR ══ */
+  .page { padding:28px 44px 20px; page-break-before:always; }
+  .page-header { display:flex; justify-content:space-between; align-items:center; border-top:2px solid var(--blue); border-bottom:1px solid var(--warm-mid); padding:6px 0; margin-bottom:14px; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-soft); }
+  .page-header .ph-brand { color:var(--blue); font-weight:600; }
 
-  /* BLOCK HEADER */
-  .block-header {
-    padding: 36px 56px 0;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  .block-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 13px;
-    color: var(--gold);
-    background: #fdf6e8;
-    border: 1px solid var(--gold-light);
-    border-radius: 20px;
-    padding: 3px 14px;
-    letter-spacing: 0.06em;
-    white-space: nowrap;
-  }
-  .block-title {
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    font-weight: 500;
-  }
+  h2.section-title { font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--blue); margin:12px 0 7px; padding-bottom:4px; border-bottom:2px solid var(--blue-pale); }
 
-  /* SERVICES */
-  .services {
-    padding: 16px 56px 0;
-  }
-  .service-item {
-    display: grid;
-    grid-template-columns: 44px 1fr;
-    gap: 0 18px;
-    padding: 22px 0;
-    border-bottom: 1px solid var(--border);
-    align-items: start;
-  }
-  .service-item:last-child { border-bottom: none; }
-  .service-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    color: var(--gold);
-    line-height: 1;
-    padding-top: 3px;
-  }
-  .service-title {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--ink);
-    margin-bottom: 5px;
-    letter-spacing: 0.01em;
-  }
-  .service-desc {
-    font-size: 13px;
-    color: var(--ink-mid);
-    line-height: 1.75;
-  }
-  .service-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin-top: 9px;
-  }
-  .tag {
-    font-size: 11px;
-    font-weight: 400;
-    padding: 2px 10px;
-    border-radius: 20px;
-    letter-spacing: 0.03em;
-  }
-  .tag-green  { background: var(--green-light); color: var(--green); }
-  .tag-gold   { background: #fdf6e8; color: #8a6e35; }
-  .tag-blue   { background: #eef2fb; color: #3a5ca8; }
+  /* CUPS bar */
+  .cups-box { background:var(--blue); color:var(--white); border-radius:5px; padding:8px 14px; font-size:11px; font-weight:500; letter-spacing:0.5px; margin:0 0 11px; display:flex; justify-content:space-between; align-items:center; }
+  .cups-box .cups-label   { font-size:8px; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.5); }
+  .cups-box .cups-provider{ font-size:9px; color:rgba(255,255,255,0.55); }
 
-  /* DIVIDER */
-  .divider-gold {
-    height: 1px;
-    background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
-    margin: 0 56px;
-    opacity: 0.35;
-  }
+  /* data strip */
+  .data-strip { display:flex; align-items:stretch; background:var(--warm-light); border-radius:6px; border-left:3px solid var(--blue-mid); margin-bottom:12px; overflow:hidden; }
+  .ds-item  { flex:1; display:flex; flex-direction:column; justify-content:center; padding:8px 12px; gap:2px; }
+  .ds-sep   { width:1px; background:var(--warm-mid); margin:6px 0; flex-shrink:0; }
+  .ds-label { font-size:7.5px; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-soft); }
+  .ds-value { font-size:11px; font-weight:600; color:var(--text); line-height:1.25; }
+  .ds-sub   { font-size:8.5px; color:#8a93a0; }
 
-  /* SICTED NOTE */
-  .sicted-block {
-    margin: 32px 56px 0;
-    padding: 24px 28px;
-    background: var(--green-light);
-    border-left: 3px solid var(--green);
-    border-radius: 0 8px 8px 0;
-  }
-  .sicted-block .sicted-label {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--green);
-    font-weight: 500;
-    margin-bottom: 7px;
-  }
-  .sicted-block p {
-    font-size: 13px;
-    color: var(--ink-mid);
-    line-height: 1.8;
-  }
-  .sicted-block p strong {
-    color: var(--green);
-    font-weight: 500;
-  }
+  /* GRÁFICA */
+  .chart-wrap  { background:var(--warm-light); border-radius:6px; padding:12px 18px 10px; margin-bottom:12px; }
+  .chart-title { font-size:8px; letter-spacing:2px; text-transform:uppercase; color:var(--text-soft); margin-bottom:12px; font-weight:600; }
+  .chart-bars  { display:flex; align-items:flex-end; gap:20px; height:84px; justify-content:center; }
+  .bar-col   { flex:1; max-width:120px; display:flex; flex-direction:column; align-items:center; gap:4px; height:100%; justify-content:flex-end; }
+  .bar-value { font-size:11px; font-weight:700; color:var(--text); }
+  .bar-fill  { width:100%; border-radius:2px 2px 0 0; }
+  .bar-p1    { background:var(--amber); }
+  .bar-p2    { background:var(--blue-mid); }
+  .bar-p3    { background:var(--green); }
+  .bar-label { font-size:10px; font-weight:700; color:var(--text-soft); margin-top:4px; }
+  .bar-kwh   { font-size:9px; color:#aab0bc; }
+  .chart-note { font-size:9px; color:var(--text-soft); margin-top:8px; border-top:1px solid var(--warm-mid); padding-top:7px; line-height:1.55; }
 
-  /* ENERGY BLOCK */
-  .energy-block {
-    margin: 28px 56px 0;
-    padding: 24px 28px;
-    background: var(--ink);
-    border-radius: 10px;
-    display: flex;
-    align-items: flex-start;
-    gap: 18px;
-  }
-  .energy-icon {
-    width: 40px; height: 40px;
-    background: var(--gold);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .energy-icon svg { width: 20px; height: 20px; }
-  .energy-text .energy-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 16px;
-    color: var(--white);
-    margin-bottom: 5px;
-  }
-  .energy-text p {
-    font-size: 13px;
-    color: rgba(255,255,255,0.6);
-    line-height: 1.7;
-  }
-  .energy-text p strong {
-    color: var(--gold-light);
-    font-weight: 400;
-  }
+  /* COMPARATIVA */
+  .comp-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:8px; }
+  .comp-col  { border-radius:6px; overflow:hidden; box-shadow:0 1px 6px rgba(30,63,110,0.07); }
+  .comp-col.cur  .comp-head  { background:var(--warm-mid); color:var(--text-soft); }
+  .comp-col.cur  .comp-body  { background:var(--warm-light); }
+  .comp-col.cur  .comp-sub   { background:var(--warm-dark); color:var(--text); }
+  .comp-col.cur  .comp-total { background:var(--warm-dark); color:var(--text); }
+  .comp-col.prop .comp-head  { background:var(--blue); color:var(--white); }
+  .comp-col.prop .comp-body  { background:var(--blue-pale); }
+  .comp-col.prop .comp-sub   { background:var(--blue-mid); color:var(--white); }
+  .comp-col.prop .comp-total { background:var(--blue); color:var(--yellow); }
+  .comp-head  { padding:8px 12px; font-weight:600; font-size:10.5px; }
+  .comp-brand { font-weight:300; font-size:9px; margin-top:1px; opacity:0.65; }
+  .comp-sec   { font-size:7px; letter-spacing:1.5px; text-transform:uppercase; padding:5px 12px 2px; font-weight:700; }
+  .comp-col.cur  .comp-sec { color:#8a93a0; }
+  .comp-col.prop .comp-sec { color:var(--blue-mid); }
+  .comp-row  { display:grid; grid-template-columns:22px 1fr auto; font-size:9.5px; padding:3px 12px; align-items:center; }
+  .comp-col.cur  .comp-row { border-bottom:1px solid var(--warm-mid); }
+  .comp-col.prop .comp-row { border-bottom:1px solid #d0ddef; }
+  .comp-row .p { font-weight:700; color:var(--text-soft); }
+  .comp-row .r { color:#aab0bc; font-size:8.5px; }
+  .comp-row .a { font-weight:600; text-align:right; }
+  .comp-sub  { display:flex; justify-content:space-between; padding:4px 12px; font-weight:700; font-size:9.5px; }
+  .comp-xrow { display:flex; justify-content:space-between; padding:3px 12px; font-size:9.5px; }
+  .comp-col.cur  .comp-xrow { border-bottom:1px solid var(--warm-mid); color:var(--text-soft); }
+  .comp-col.prop .comp-xrow { border-bottom:1px solid #d0ddef; color:#3a5a80; }
+  .comp-xrow.good  { color:var(--green) !important; font-weight:600; }
+  .comp-xrow.total { font-weight:700; color:var(--text) !important; }
+  .comp-total { display:flex; justify-content:space-between; padding:8px 12px; font-weight:700; font-size:16px; }
 
-  /* BLOCK 2 — FOTOVOLTAICA */
-  .block2-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    padding: 20px 56px 0;
-  }
-  .b2-card {
-    padding: 22px 22px;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-  }
-  .b2-card-icon {
-    width: 34px; height: 34px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 12px;
-  }
-  .b2-card-icon svg { width: 18px; height: 18px; }
-  .b2-card-title {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--ink);
-    margin-bottom: 6px;
-  }
-  .b2-card-desc {
-    font-size: 12px;
-    color: var(--ink-mid);
-    line-height: 1.75;
-  }
+  .footnote { font-size:8.5px; color:#aab0bc; margin-bottom:10px; line-height:1.5; }
 
-  /* BLOCK 3 — HUELLA */
-  .huella-block {
-    margin: 32px 56px 0;
-    padding: 28px 32px;
-    background: #f5f3fb;
-    border-radius: 10px;
-    border: 1px solid #dbd6f0;
-  }
-  .huella-header {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 14px;
-  }
-  .huella-icon {
-    width: 40px; height: 40px;
-    background: #7c6cb5;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .huella-icon svg { width: 20px; height: 20px; }
-  .huella-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 16px;
-    color: #3d2e7c;
-  }
-  .huella-body {
-    font-size: 13px;
-    color: var(--ink-mid);
-    line-height: 1.8;
-    margin-bottom: 12px;
-  }
-  .huella-body strong {
-    color: #3d2e7c;
-    font-weight: 500;
-  }
-  .huella-items {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-  }
-  .huella-item {
-    font-size: 11px;
-    background: #ece9f8;
-    color: #4a3a8a;
-    padding: 3px 12px;
-    border-radius: 20px;
-  }
+  /* AHORRO STRIP */
+  .ahorro-strip { background:linear-gradient(120deg,#1e3f6e 0%,#0f2240 100%); border-radius:8px; padding:12px 18px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; margin-bottom:10px; text-align:center; }
+  .ah-item { padding:0 14px; border-right:1px solid rgba(255,255,255,0.08); }
+  .ah-item:last-child { border-right:none; }
+  .ah-label { font-size:8px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:4px; }
+  .ah-value { font-size:21px; font-weight:700; color:var(--yellow); line-height:1; }
+  .ah-value.green { color:#4fe69a; }
+  .ah-sub   { font-size:8.5px; color:rgba(255,255,255,0.28); margin-top:3px; }
 
   /* FOOTER */
-  .footer {
-    margin-top: 44px;
-    padding: 32px 56px;
-    background: var(--ink);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .footer-brand {
-    font-family: 'Playfair Display', serif;
-    font-size: 17px;
-    color: var(--white);
-  }
-  .footer-contact {
-    font-size: 12px;
-    color: rgba(255,255,255,0.4);
-    text-align: right;
-    line-height: 1.8;
-  }
-  .footer-contact a { color: var(--gold); text-decoration: none; }
+  footer { background:linear-gradient(90deg,#0d1f38 0%,#1a3560 100%); color:rgba(255,255,255,0.38); padding:10px 44px; display:flex; justify-content:space-between; align-items:center; font-size:10px; border-top:3px solid rgba(252,219,80,0.45); }
+  footer .brand    { color:var(--yellow); font-weight:600; letter-spacing:1px; }
+  footer .validity { text-align:right; font-size:9px; }
 
-  .spacer { height: 40px; }
+  /* PRINT */
+  @media print {
+    @page { size:A4; margin:0; }
+    * { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+    body { background:white; }
+    .cover { width:210mm; height:297mm; page-break-after:always; padding:38mm 16mm 14mm; }
+    .cover-title { font-size:72pt; }
+    .page  { width:210mm; min-height:297mm; padding:10mm 13mm 8mm; page-break-before:always; }
+    footer { padding:8px 13mm; }
+    .comp-col { box-shadow:none; }
+  }
+  @media (max-width:640px) {
+    .cover { padding:28px 22px; height:auto; min-height:100vh; }
+    .page  { padding:24px 18px; }
+    .comp-grid { grid-template-columns:1fr; }
+    .ahorro-strip { grid-template-columns:1fr; padding:16px; }
+    .ah-item { border-right:none; border-bottom:1px solid rgba(255,255,255,0.08); padding:0 0 10px; margin-bottom:10px; }
+    .ah-item:last-child { border:none; margin:0; padding:0; }
+    .cover-savings { flex-direction:column; }
+    footer { flex-direction:column; gap:6px; text-align:center; }
+  }
 </style>
 </head>
 <body>
+
+<!-- ══════════════ PORTADA ══════════════ -->
+<div class="cover">
+  <div class="cover-glow"></div>
+  <div class="cover-glow2"></div>
+  <div class="cover-dots">
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="cover-brand">
+    <span class="brand-name">Ingedás</span>
+    <span>Estudio de Electricidad · 2026</span>
+  </div>
+  <div class="cover-body">
+    <div class="cover-eyebrow">Propuesta de optimización energética</div>
+    <div class="cover-title">Estudio<br><strong>Eléctrico</strong></div>
+    <div class="cover-subtitle">Análisis &nbsp;·&nbsp; Comparativa &nbsp;·&nbsp; Ahorro</div>
+    <div class="cover-client-box">
+      <div class="label">Cliente</div>
+      <div class="client-name">María Cristina Ramírez Díaz</div>
+      <div class="client-meta">NIF 74235262W &nbsp;·&nbsp; Calle Baleares 14 B-4, Guardamar del Segura · Calle José Mª Puchaes 33, Benferri</div>
+      <div class="cover-pills">
+        <span class="cover-pill accent">Tarifa 2.0TD</span>
+        <span class="cover-pill">5,75 kW contratados</span>
+        <span class="cover-pill">2 suministros</span>
+        <span class="cover-pill">Gana Energía</span>
+      </div>
+    </div>
+    <div class="cover-savings">
+      <div class="cs-box">
+        <div class="cs-label">Ahorro estimado anual</div>
+        <div class="cs-value">~218 €</div>
+        <div class="cs-sub">Suma de los dos suministros</div>
+      </div>
+      <div class="cs-box green">
+        <div class="cs-label">Reducción media</div>
+        <div class="cs-value green">−12,7%</div>
+        <div class="cs-sub">Sobre el importe total actual</div>
+      </div>
+      <div class="cs-box">
+        <div class="cs-label">Sin coste de servicio</div>
+        <div class="cs-value" style="font-size:15px;padding-top:4px;">0,00 €</div>
+        <div class="cs-sub">Gestión incluida sin cargo</div>
+      </div>
+    </div>
+  </div>
+  <div class="cover-footer">
+    <div>
+      <div>Fecha de emisión: 21 de mayo de 2026 &nbsp;·&nbsp; Válido hasta el 27 de mayo de 2026</div>
+      <div style="margin-top:5px;color:rgba(255,255,255,0.18);">Ingedás · Servicios Ingedás, S.L. &nbsp;·&nbsp; Avda. Del Mar 10, 03300 Orihuela (Alicante) &nbsp;·&nbsp; B06816938 &nbsp;·&nbsp; administracion@ingedas.es &nbsp;·&nbsp; www.ingedas.com &nbsp;·&nbsp; 626 119 254</div>
+    </div>
+  </div>
+  <div class="cover-watermark">ingedás</div>
+</div>
+
+
+<!-- ══════════════ PÁGINA 1 — GUARDAMAR DEL SEGURA ══════════════ -->
 <div class="page">
+  <div class="page-header">
+    <span class="ph-brand">Ingedás · Servicios Ingedás, S.L.</span>
+    <span>Suministro 1 de 2 · Guardamar del Segura</span>
+  </div>
 
-  <!-- HEADER -->
-  <div class="header">
-    <div class="logo-line">
-      <div class="logo-dot"></div>
-      <div>
-        <div class="logo-text">Ingedás</div>
-        <div class="logo-sub">Consultoría Energética</div>
+  <div class="cups-box">
+    <div>
+      <div class="cups-label">CUPS del punto de suministro</div>
+      ES0021000037089262WB
+    </div>
+    <div class="cups-provider">Gana Energía (Gaolania Servicios S.L.)</div>
+  </div>
+
+  <h2 class="section-title">Datos del Suministro</h2>
+  <div class="data-strip">
+    <div class="ds-item">
+      <span class="ds-label">Titular</span>
+      <span class="ds-value">Mª Cristina Ramírez Díaz</span>
+      <span class="ds-sub">NIF 74235262W · Guardamar del Segura</span>
+    </div>
+    <div class="ds-sep"></div>
+    <div class="ds-item">
+      <span class="ds-label">Compañía actual</span>
+      <span class="ds-value">Gana Energía</span>
+      <span class="ds-sub">Precio por tramos P1/P2/P3</span>
+    </div>
+    <div class="ds-sep"></div>
+    <div class="ds-item">
+      <span class="ds-label">Tarifa / Potencia</span>
+      <span class="ds-value">2.0TD · 5,75 kW</span>
+      <span class="ds-sub">P1 y P2 a 5,75 kW contratados</span>
+    </div>
+    <div class="ds-sep"></div>
+    <div class="ds-item">
+      <span class="ds-label">Periodo analizado</span>
+      <span class="ds-value">61 kWh · 30 días</span>
+      <span class="ds-sub">Factura N_26002008433 · 19/04–18/05/2026</span>
+    </div>
+  </div>
+
+  <h2 class="section-title">Consumo por Periodo — Factura N_26002008433</h2>
+  <div class="chart-wrap">
+    <div class="chart-title">Distribución de consumo por periodo horario (kWh · 30 días)</div>
+    <div class="chart-bars">
+      <!-- max: 48 kWh → 84px | escala: 84/48 = 1,75 -->
+      <div class="bar-col">
+        <div class="bar-value">4 kWh</div>
+        <div class="bar-fill bar-p1" style="height:7px;width:80%;"></div>
+        <div class="bar-label">P1 · Punta</div>
+        <div class="bar-kwh">0,193 €/kWh</div>
+      </div>
+      <div class="bar-col">
+        <div class="bar-value">9 kWh</div>
+        <div class="bar-fill bar-p2" style="height:16px;width:80%;"></div>
+        <div class="bar-label">P2 · Llano</div>
+        <div class="bar-kwh">0,126 €/kWh</div>
+      </div>
+      <div class="bar-col">
+        <div class="bar-value">48 kWh</div>
+        <div class="bar-fill bar-p3" style="height:84px;width:80%;"></div>
+        <div class="bar-label">P3 · Valle</div>
+        <div class="bar-kwh">0,102 €/kWh</div>
       </div>
     </div>
-    <h1 class="header-title">Servicios de <em>optimización energética</em><br>para establecimientos turísticos</h1>
-    <p class="header-sub">Propuesta de valor — Establecimientos SICTED</p>
+    <div class="chart-note">
+      El <strong style="color:var(--green);">78,7% del consumo se concentra en P3 (Valle)</strong>, el periodo de menor coste.
+      La propuesta de Ingedás aplica precios diferenciados <strong>P1 0,159 · P2 0,129 · P3 0,099 €/kWh</strong>
+      y reduce el término de potencia de <strong>0,089434 a 0,079 €/kW·día</strong>.
+    </div>
   </div>
 
-  <!-- INTRO -->
-  <div class="intro">
-    <p>Ingedás analiza, optimiza y certifica la energía de tu establecimiento. Reducimos costes reales en factura, acreditamos el uso de <strong>energía 100% renovable</strong>, evaluamos el rendimiento de tu instalación fotovoltaica y recopilamos la documentación necesaria para el <strong>cálculo de huella de carbono</strong>. Todo ello con documentación técnica acreditable ante SICTED como mejora continua.</p>
-  </div>
+  <h2 class="section-title">Comparativa de Tarifas · 30 días</h2>
+  <div class="comp-grid">
 
-  <!-- BLOQUE 1 -->
-  <div class="block-header">
-    <span class="block-number">Bloque 01</span>
-    <span class="block-title">Análisis y optimización de factura eléctrica</span>
-  </div>
-
-  <div class="services">
-
-    <div class="service-item">
-      <div class="service-num">01</div>
-      <div>
-        <div class="service-title">Optimización de potencia contratada</div>
-        <div class="service-desc">Revisamos el maxímetro por periodo tarifario (P1–P6). Detectamos excesos penalizados al 200% y proponemos el ajuste óptimo. Tramitamos la modificación con la distribuidora.</div>
-        <div class="service-tags">
-          <span class="tag tag-blue">Tarifa 2.0TD / 3.0TD</span>
-          <span class="tag tag-gold">Tramitación ATR incluida</span>
-        </div>
+    <div class="comp-col cur">
+      <div class="comp-head">Factura Actual
+        <div class="comp-brand">Gana Energía · Tramos P1/P2/P3</div>
       </div>
-    </div>
-
-    <div class="service-item">
-      <div class="service-num">02</div>
-      <div>
-        <div class="service-title">Análisis y eliminación de energía reactiva</div>
-        <div class="service-desc">Si el cos φ está por debajo de 0,95, se generan cargos evitables en factura. Identificamos el origen, cuantificamos el sobrecoste y proponemos solución técnica con retorno de inversión inferior a dos años.</div>
-        <div class="service-tags">
-          <span class="tag tag-blue">Diagnóstico cos φ</span>
-          <span class="tag tag-gold">Cargo eliminado permanentemente</span>
-        </div>
+      <div class="comp-body">
+        <div class="comp-sec">Potencia · 30 días · 5,75 kW</div>
+        <div class="comp-row"><span class="p">P1</span><span class="r">5,75 kW · 0,089434 €/kW·día</span><span class="a">15,43 €</span></div>
+        <div class="comp-row"><span class="p">P2</span><span class="r">5,75 kW · 0,089434 €/kW·día</span><span class="a">15,43 €</span></div>
+        <div class="comp-sub"><span>Subtotal Potencia</span><span>30,85 €</span></div>
+        <div class="comp-sec">Energía · precio por tramos</div>
+        <div class="comp-row"><span class="p">P1</span><span class="r">4 kWh · 0,193 €/kWh</span><span class="a">0,77 €</span></div>
+        <div class="comp-row"><span class="p">P2</span><span class="r">9 kWh · 0,126 €/kWh</span><span class="a">1,13 €</span></div>
+        <div class="comp-row"><span class="p">P3</span><span class="r">48 kWh · 0,102 €/kWh</span><span class="a">4,90 €</span></div>
+        <div class="comp-sub"><span>Subtotal Energía</span><span>6,80 €</span></div>
+        <div class="comp-sec">Otros</div>
+        <div class="comp-xrow"><span>Alquiler de contador</span><span>0,80 €</span></div>
+        <div class="comp-xrow"><span>Bono social</span><span>0,57 €</span></div>
+        <div class="comp-xrow"><span>Imp. eléctrico (0,5%)</span><span>0,20 €</span></div>
+        <div class="comp-xrow total"><span>Base Imponible</span><span>39,22 €</span></div>
+        <div class="comp-xrow"><span>IVA (10%)</span><span>3,92 €</span></div>
       </div>
+      <div class="comp-total"><span>Total Periodo</span><span>43,14 €</span></div>
     </div>
 
-    <div class="service-item">
-      <div class="service-num">03</div>
-      <div>
-        <div class="service-title">Estudio de consumo y perfil de carga</div>
-        <div class="service-desc">Accedemos a la curva horaria via DATADIS. Detectamos anomalías, consumos fuera de horario y determinamos la modalidad tarifaria más eficiente para el patrón real del establecimiento.</div>
-        <div class="service-tags">
-          <span class="tag tag-blue">Datos DATADIS</span>
-          <span class="tag tag-gold">Selección de tarifa óptima</span>
-        </div>
+    <div class="comp-col prop">
+      <div class="comp-head">Propuesta Ingedás — Tramos
+        <div class="comp-brand">Precio diferenciado P1/P2/P3 · Sin coste de servicio</div>
       </div>
-    </div>
-
-    <div class="service-item">
-      <div class="service-num">04</div>
-      <div>
-        <div class="service-title">Informe comparativo y plan de acción</div>
-        <div class="service-desc">Entregamos un documento con situación actual versus escenario optimizado, ahorro en euros desglosado por concepto y periodo de retorno. Ingedás gestiona todos los trámites.</div>
-        <div class="service-tags">
-          <span class="tag tag-green">Acreditable ante SICTED</span>
-          <span class="tag tag-gold">Gestión integral incluida</span>
-        </div>
+      <div class="comp-body">
+        <div class="comp-sec">Potencia · 30 días · 5,75 kW</div>
+        <div class="comp-row"><span class="p">P1</span><span class="r">5,75 kW · 0,079 €/kW·día</span><span class="a">13,63 €</span></div>
+        <div class="comp-row"><span class="p">P2</span><span class="r">5,75 kW · 0,079 €/kW·día</span><span class="a">13,63 €</span></div>
+        <div class="comp-sub"><span>Subtotal Potencia</span><span>27,25 €</span></div>
+        <div class="comp-sec">Energía · precio diferenciado por periodo</div>
+        <div class="comp-row"><span class="p">P1</span><span class="r">4 kWh · 0,159 €/kWh</span><span class="a">0,64 €</span></div>
+        <div class="comp-row"><span class="p">P2</span><span class="r">9 kWh · 0,129 €/kWh</span><span class="a">1,16 €</span></div>
+        <div class="comp-row"><span class="p">P3</span><span class="r">48 kWh · 0,099 €/kWh</span><span class="a">4,75 €</span></div>
+        <div class="comp-sub"><span>Subtotal Energía</span><span>6,55 €</span></div>
+        <div class="comp-sec">Otros</div>
+        <div class="comp-xrow"><span>Alquiler de contador</span><span>0,80 €</span></div>
+        <div class="comp-xrow"><span>Bono social</span><span>0,57 €</span></div>
+        <div class="comp-xrow"><span>Imp. eléctrico (0,5%)</span><span>0,18 €</span></div>
+        <div class="comp-xrow good"><span>✓ Sin coste de servicio</span><span>—</span></div>
+        <div class="comp-xrow total"><span>Base Imponible</span><span>35,35 €</span></div>
+        <div class="comp-xrow"><span>IVA (10%)</span><span>3,53 €</span></div>
       </div>
+      <div class="comp-total"><span>Total Periodo</span><span>38,88 €</span></div>
     </div>
 
   </div>
 
-  <div class="sicted-block" style="margin-top: 28px;">
-    <div class="sicted-label">Valor para SICTED</div>
-    <p>El informe de ahorro y la migración a energía renovable constituyen <strong>acciones de mejora medioambiental acreditables ante el comité de distinción</strong>. En el siguiente ciclo, Ingedás actualiza el informe con los datos reales de reducción obtenidos, manteniendo el expediente activo y en constante mejora.</p>
-  </div>
+  <p class="footnote">* Estudio realizado con la factura N_26002008433, periodo 19/04/2026 – 18/05/2026 (30 días). Propuesta Ingedás: precio de potencia 0,079 €/kW·día (P1 y P2); energía por tramos P1 0,159 · P2 0,129 · P3 0,099 €/kWh. Sin coste de servicio. Resto de conceptos aplicados en idénticas condiciones.</p>
 
-  <div class="energy-block">
-    <div class="energy-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="5"/>
-        <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-      </svg>
+  <h2 class="section-title">Resumen del Ahorro</h2>
+  <div class="ahorro-strip">
+    <div class="ah-item">
+      <div class="ah-label">Ahorro en el periodo</div>
+      <div class="ah-value">4,26 €</div>
+      <div class="ah-sub">30 días · factura real vs. propuesta</div>
     </div>
-    <div class="energy-text">
-      <div class="energy-title">Energía 100% de fuentes renovables</div>
-      <p>Gestionamos el cambio a una comercializadora con <strong>garantía de origen certificada</strong>. El establecimiento puede acreditar ante clientes y ante SICTED que toda su energía procede de fuentes renovables — visible y verificable desde el primer mes.</p>
+    <div class="ah-item">
+      <div class="ah-label">Reducción sobre factura</div>
+      <div class="ah-value green">−9,9%</div>
+      <div class="ah-sub">43,14 € → 38,88 €</div>
     </div>
-  </div>
-
-  <div class="spacer"></div>
-  <div class="divider-gold"></div>
-
-  <!-- BLOQUE 2 -->
-  <div class="block-header" style="margin-top: 36px;">
-    <span class="block-number">Bloque 02</span>
-    <span class="block-title">Análisis del rendimiento fotovoltaico</span>
-  </div>
-
-  <div style="padding: 14px 56px 0;">
-    <p style="font-size: 13px; color: var(--ink-mid); line-height: 1.8;">Si el establecimiento dispone de instalación fotovoltaica, realizamos un estudio técnico para verificar que el sistema está produciendo según su potencial real. Identificamos pérdidas de rendimiento, ineficiencias y oportunidades de mejora, con documentación acreditable ante SICTED como acción de sostenibilidad activa.</p>
-  </div>
-
-  <div class="block2-grid">
-
-    <div class="b2-card">
-      <div class="b2-card-icon" style="background: #fff8e6;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#b07d1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-        </svg>
-      </div>
-      <div class="b2-card-title">Análisis de producción real</div>
-      <div class="b2-card-desc">Comparativa entre la producción registrada y la producción esperada según la potencia instalada, orientación e irradiación de la zona.</div>
-    </div>
-
-    <div class="b2-card">
-      <div class="b2-card-icon" style="background: #eef2fb;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#3a5ca8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-        </svg>
-      </div>
-      <div class="b2-card-title">Detección de pérdidas</div>
-      <div class="b2-card-desc">Identificación de strings degradados, sombras no previstas, desajustes en el inversor o pérdidas por temperatura que reducen el rendimiento del sistema.</div>
-    </div>
-
-    <div class="b2-card">
-      <div class="b2-card-icon" style="background: var(--green-light);">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#2d6a4f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
-        </svg>
-      </div>
-      <div class="b2-card-title">Ratio de autoconsumo</div>
-      <div class="b2-card-desc">Cuánta energía generada se consume in situ frente a la vertida a red. Propuesta para maximizar el autoconsumo y reducir dependencia de la comercializadora.</div>
-    </div>
-
-    <div class="b2-card">
-      <div class="b2-card-icon" style="background: #fdf6e8;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#8a6e35" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
-        </svg>
-      </div>
-      <div class="b2-card-title">Informe técnico acreditable</div>
-      <div class="b2-card-desc">Documento con los indicadores de rendimiento (PR, kWh/kWp) y recomendaciones de mejora, válido como evidencia de gestión sostenible ante SICTED.</div>
-    </div>
-
-  </div>
-
-  <div class="spacer"></div>
-  <div class="divider-gold"></div>
-
-  <!-- BLOQUE 3 — HUELLA DE CARBONO -->
-  <div class="block-header" style="margin-top: 36px;">
-    <span class="block-number">Bloque 03</span>
-    <span class="block-title">Huella de carbono — Fase 1: recopilación de documentación</span>
-  </div>
-
-  <div class="huella-block" style="margin-top: 20px;">
-    <div class="huella-header">
-      <div class="huella-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-        </svg>
-      </div>
-      <div class="huella-title">Fase 1 — Recopilación y estructuración de documentación</div>
-    </div>
-    <p class="huella-body">Recopilamos y organizamos toda la información energética del establecimiento necesaria para iniciar el cálculo de su <strong>huella de carbono (alcances 1 y 2)</strong> conforme al estándar GHG Protocol. Esta fase prepara al establecimiento para acometer el cálculo completo — con Ingedás o con cualquier entidad certificadora — y constituye por sí misma una <strong>acción de mejora ambiental acreditable ante SICTED</strong>.</p>
-    <div class="huella-items">
-      <span class="huella-item">Consumo eléctrico anual</span>
-      <span class="huella-item">Factor de emisión de la red</span>
-      <span class="huella-item">Energía renovable certificada</span>
-      <span class="huella-item">Producción fotovoltaica propia</span>
-      <span class="huella-item">Alcance 1 y Alcance 2</span>
-      <span class="huella-item">Acreditable ante SICTED</span>
-      <span class="huella-item">Base para ISO 14064 / Biosphere</span>
-    </div>
-  </div>
-
-  <div class="spacer"></div>
-  <div class="divider-gold"></div>
-
-  <!-- TARIFAS -->
-  <div class="block-header" style="margin-top: 36px;">
-    <span class="block-number">Tarifas</span>
-    <span class="block-title">Inversión por servicio</span>
-  </div>
-
-  <div style="padding: 20px 56px 0;">
-    <table style="width:100%; border-collapse: collapse; font-size: 13px;">
-      <thead>
-        <tr style="border-bottom: 2px solid var(--border);">
-          <th style="text-align:left; padding: 10px 0; font-weight:500; color: var(--ink-light); font-size:11px; letter-spacing:0.1em; text-transform:uppercase;">Servicio</th>
-          <th style="text-align:right; padding: 10px 0; font-weight:500; color: var(--ink-light); font-size:11px; letter-spacing:0.1em; text-transform:uppercase;">Importe</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr style="border-bottom: 1px solid var(--border);">
-          <td style="padding: 14px 0; color: var(--ink-mid);">Bloque 01 — Análisis y optimización de factura eléctrica</td>
-          <td style="padding: 14px 0; text-align:right; font-weight:500; color: var(--green);">Gratuito</td>
-        </tr>
-        <tr style="border-bottom: 1px solid var(--border);">
-          <td style="padding: 14px 0; color: var(--ink-mid);">Bloque 02 — Análisis del rendimiento fotovoltaico</td>
-          <td style="padding: 14px 0; text-align:right; font-weight:500; color: var(--ink);">200 €</td>
-        </tr>
-        <tr style="border-bottom: 1px solid var(--border);">
-          <td style="padding: 14px 0; color: var(--ink-mid);">
-            Bloque 03 — Huella de carbono (Fase 1)
-            <div style="font-size:12px; color: var(--ink-light); margin-top:3px;">Establecimientos estándar</div>
-          </td>
-          <td style="padding: 14px 0; text-align:right; font-weight:500; color: var(--ink);">170 €</td>
-        </tr>
-        <tr style="border-bottom: 1px solid var(--border);">
-          <td style="padding: 14px 0; color: var(--ink-mid);">
-            Bloque 03 — Huella de carbono (Fase 1)
-            <div style="font-size:12px; color: var(--ink-light); margin-top:3px;">Gran consumidor — hoteles, instalaciones &gt;1.000.000 kWh/año o suministros en Alta Tensión</div>
-          </td>
-          <td style="padding: 14px 0; text-align:right; font-weight:500; color: var(--ink); white-space:nowrap;">A valorar</td>
-        </tr>
-        <tr style="background: #fdf6e8;">
-          <td style="padding: 16px 12px; color: var(--ink); font-weight:500; border-radius: 8px 0 0 8px;">
-            Pack completo — Bloques 02 + 03 (estándar)
-            <div style="font-size:12px; color: #8a6e35; margin-top:3px; font-weight:400;">Bloque 01 incluido sin coste adicional</div>
-          </td>
-          <td style="padding: 16px 12px; text-align:right; font-weight:500; color: var(--gold); font-size:15px; border-radius: 0 8px 8px 0;">370 €</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <p style="font-size: 12px; color: var(--ink-light); margin-top: 16px; line-height: 1.75;">Los precios indicados no incluyen IVA. Para establecimientos clasificados como gran consumidor (consumo anual superior a 1.000.000 kWh o suministro en Alta Tensión), la complejidad de la documentación energética requiere una valoración previa sin compromiso.</p>
-  </div>
-
-  <div class="spacer"></div>
-
-  <!-- FOOTER -->
-  <div class="footer">
-    <div class="footer-brand">Ingedás</div>
-    <div class="footer-contact">
-      Servicios Ingedás, S.L. · Alicante<br>
-      <a href="tel:626119254">626 119 254</a> · <a href="mailto:administracion@ingedas.es">administracion@ingedas.es</a> · <a href="https://www.ingedas.com" target="_blank">www.ingedas.com</a>
+    <div class="ah-item">
+      <div class="ah-label">Estimación ahorro anual</div>
+      <div class="ah-value">~52 €</div>
+      <div class="ah-sub">Estimación proporcional · 12 meses</div>
     </div>
   </div>
 
 </div>
+<footer>
+  <span class="brand">Ingedás</span>
+  <span>administracion@ingedas.es &nbsp;·&nbsp; 626 119 254 &nbsp;·&nbsp; www.ingedas.com</span>
+  <span class="validity">Oferta válida hasta el 27/05/2026 · Estudio sin coste</span>
+</footer>
+
+
+<!-- ══════════════ PÁGINA 2 — BENFERRI ══════════════ -->
+<div class="page">
+  <div class="page-header">
+    <span class="ph-brand">Ingedás · Servicios Ingedás, S.L.</span>
+    <span>Suministro 2 de 2 · Benferri</span>
+  </div>
+
+  <div class="cups-box">
+    <div>
+      <div class="cups-label">CUPS del punto de suministro</div>
+      ES0021000013542074XQ
+    </div>
+    <div class="cups-provider">Gana Energía (Gaolania Servicios S.L.)</div>
+  </div>
+
+  <h2 class="section-title">Datos del Suministro</h2>
+  <div class="data-strip">
+    <div class="ds-item">
+      <span class="ds-label">Titular</span>
+      <span class="ds-value">Mª Cristina Ramírez Díaz</span>
+      <span class="ds-sub">NIF 74235262W · Benferri, Alicante</span>
+    </div>
+    <div class="ds-sep"></div>
+    <div class="ds-item">
+      <span class="ds-label">Compañía actual</span>
+      <span class="ds-value">Gana Energía</span>
+      <span class="ds-sub">Precio por tramos P1/P2/P3</span>
+    </div>
+    <div class="ds-sep"></div>
+    <div class="ds-item">
+      <span class="ds-label">Tarifa / Potencia</span>
+      <span class="ds-value">2.0TD · 5,75 kW</span>
+      <span class="ds-sub">P1 y P2 a 5,75 kW contratados</span>
+    </div>
+    <div class="ds-sep"></div>
+    <div class="ds-item">
+      <span class="ds-label">Periodo analizado</span>
+      <span class="ds-value">377 kWh · 31 días</span>
+      <span class="ds-sub">Factura N_26001658848 · 26/03–25/04/2026</span>
+    </div>
+  </div>
+
+  <h2 class="section-title">Consumo por Periodo — Factura N_26001658848</h2>
+  <div class="chart-wrap">
+    <div class="chart-title">Distribución de consumo por periodo horario (kWh · 31 días)</div>
+    <div class="chart-bars">
+      <!-- max: 146 kWh → 84px | escala: 84/146 = 0,575 -->
+      <div class="bar-col">
+        <div class="bar-value">146 kWh</div>
+        <div class="bar-fill bar-p1" style="height:84px;width:80%;"></div>
+        <div class="bar-label">P1 · Punta</div>
+        <div class="bar-kwh">0,193 €/kWh</div>
+      </div>
+      <div class="bar-col">
+        <div class="bar-value">89 kWh</div>
+        <div class="bar-fill bar-p2" style="height:51px;width:80%;"></div>
+        <div class="bar-label">P2 · Llano</div>
+        <div class="bar-kwh">0,126 €/kWh</div>
+      </div>
+      <div class="bar-col">
+        <div class="bar-value">142 kWh</div>
+        <div class="bar-fill bar-p3" style="height:82px;width:80%;"></div>
+        <div class="bar-label">P3 · Valle</div>
+        <div class="bar-kwh">0,102 €/kWh</div>
+      </div>
+    </div>
+    <div class="chart-note">
+      Consumo distribuido entre los tres periodos: P1 38,7% · P2 23,6% · P3 37,7%.
+      La propuesta de Ingedás aplica <strong>precio fijo único 0,119 €/kWh</strong> en todos los periodos
+      y reduce el término de potencia de <strong>0,089434 a 0,079 €/kW·día</strong>, generando ahorro directo en ambos conceptos.
+    </div>
+  </div>
+
+  <h2 class="section-title">Comparativa de Tarifas · 31 días</h2>
+  <div class="comp-grid">
+
+    <div class="comp-col cur">
+      <div class="comp-head">Factura Actual
+        <div class="comp-brand">Gana Energía · Tramos P1/P2/P3</div>
+      </div>
+      <div class="comp-body">
+        <div class="comp-sec">Potencia · 31 días · 5,75 kW</div>
+        <div class="comp-row"><span class="p">P1</span><span class="r">5,75 kW · 0,089434 €/kW·día</span><span class="a">15,94 €</span></div>
+        <div class="comp-row"><span class="p">P2</span><span class="r">5,75 kW · 0,089434 €/kW·día</span><span class="a">15,94 €</span></div>
+        <div class="comp-sub"><span>Subtotal Potencia</span><span>31,88 €</span></div>
+        <div class="comp-sec">Energía · precio por tramos</div>
+        <div class="comp-row"><span class="p">P1</span><span class="r">146 kWh · 0,193 €/kWh</span><span class="a">28,18 €</span></div>
+        <div class="comp-row"><span class="p">P2</span><span class="r">89 kWh · 0,126 €/kWh</span><span class="a">11,21 €</span></div>
+        <div class="comp-row"><span class="p">P3</span><span class="r">142 kWh · 0,102 €/kWh</span><span class="a">14,48 €</span></div>
+        <div class="comp-sub"><span>Subtotal Energía</span><span>53,88 €</span></div>
+        <div class="comp-sec">Otros</div>
+        <div class="comp-xrow"><span>Alquiler de contador</span><span>0,83 €</span></div>
+        <div class="comp-xrow"><span>Bono social</span><span>0,59 €</span></div>
+        <div class="comp-xrow"><span>Imp. eléctrico (0,5%)</span><span>0,44 €</span></div>
+        <div class="comp-xrow total"><span>Base Imponible</span><span>87,62 €</span></div>
+        <div class="comp-xrow"><span>IVA (10%)</span><span>8,76 €</span></div>
+      </div>
+      <div class="comp-total"><span>Total Periodo</span><span>96,38 €</span></div>
+    </div>
+
+    <div class="comp-col prop">
+      <div class="comp-head">Propuesta Ingedás — Precio Fijo
+        <div class="comp-brand">0,119 €/kWh precio único · Sin coste de servicio</div>
+      </div>
+      <div class="comp-body">
+        <div class="comp-sec">Potencia · 31 días · 5,75 kW</div>
+        <div class="comp-row"><span class="p">P1</span><span class="r">5,75 kW · 0,079 €/kW·día</span><span class="a">14,08 €</span></div>
+        <div class="comp-row"><span class="p">P2</span><span class="r">5,75 kW · 0,079 €/kW·día</span><span class="a">14,08 €</span></div>
+        <div class="comp-sub"><span>Subtotal Potencia</span><span>28,16 €</span></div>
+        <div class="comp-sec">Energía · precio fijo único</div>
+        <div class="comp-row"><span class="p">P1</span><span class="r">146 kWh · 0,119 €/kWh</span><span class="a">17,37 €</span></div>
+        <div class="comp-row"><span class="p">P2</span><span class="r">89 kWh · 0,119 €/kWh</span><span class="a">10,59 €</span></div>
+        <div class="comp-row"><span class="p">P3</span><span class="r">142 kWh · 0,119 €/kWh</span><span class="a">16,90 €</span></div>
+        <div class="comp-sub"><span>Subtotal Energía</span><span>44,86 €</span></div>
+        <div class="comp-sec">Otros</div>
+        <div class="comp-xrow"><span>Alquiler de contador</span><span>0,83 €</span></div>
+        <div class="comp-xrow"><span>Bono social</span><span>0,59 €</span></div>
+        <div class="comp-xrow"><span>Imp. eléctrico (0,5%)</span><span>0,37 €</span></div>
+        <div class="comp-xrow good"><span>✓ Sin coste de servicio</span><span>—</span></div>
+        <div class="comp-xrow total"><span>Base Imponible</span><span>74,82 €</span></div>
+        <div class="comp-xrow"><span>IVA (10%)</span><span>7,48 €</span></div>
+      </div>
+      <div class="comp-total"><span>Total Periodo</span><span>82,30 €</span></div>
+    </div>
+
+  </div>
+
+  <p class="footnote">* Estudio realizado con la factura N_26001658848, periodo 26/03/2026 – 25/04/2026 (31 días). Propuesta Ingedás: precio de potencia 0,079 €/kW·día (P1 y P2); energía precio fijo único 0,119 €/kWh. Sin coste de servicio. Resto de conceptos aplicados en idénticas condiciones.</p>
+
+  <h2 class="section-title">Resumen del Ahorro</h2>
+  <div class="ahorro-strip">
+    <div class="ah-item">
+      <div class="ah-label">Ahorro en el periodo</div>
+      <div class="ah-value">14,08 €</div>
+      <div class="ah-sub">31 días · factura real vs. propuesta</div>
+    </div>
+    <div class="ah-item">
+      <div class="ah-label">Reducción sobre factura</div>
+      <div class="ah-value green">−14,6%</div>
+      <div class="ah-sub">96,38 € → 82,30 €</div>
+    </div>
+    <div class="ah-item">
+      <div class="ah-label">Estimación ahorro anual</div>
+      <div class="ah-value">~166 €</div>
+      <div class="ah-sub">Estimación proporcional · 12 meses</div>
+    </div>
+  </div>
+
+</div>
+<footer>
+  <span class="brand">Ingedás</span>
+  <span>administracion@ingedas.es &nbsp;·&nbsp; 626 119 254 &nbsp;·&nbsp; www.ingedas.com</span>
+  <span class="validity">Oferta válida hasta el 27/05/2026 · Estudio sin coste</span>
+</footer>
+
 </body>
 </html>
