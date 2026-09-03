@@ -1,544 +1,300 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ingedás · Estudio Eléctrico · María Cristina Ramírez Díaz</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --yellow:      #fcdb50;
-    --blue:        #1e3f6e;
-    --blue-mid:    #3a6ca8;
-    --blue-pale:   #eaf0f8;
-    --blue-dark:   #0d1f38;
-    --green:       #1f9e5c;
-    --amber:       #d4820a;
-    --amber-pale:  #fef6e4;
-    --warm-light:  #f5f3ee;
-    --warm-mid:    #e2dfd8;
-    --warm-dark:   #c8c4bc;
-    --text:        #1c2433;
-    --text-soft:   #5a6475;
-    --white:       #ffffff;
-  }
-  body { font-family:'Montserrat',sans-serif; font-weight:300; color:var(--text); background:var(--white); line-height:1.6; }
-
-  /* ══ PORTADA ══ */
-  .cover {
-    background: linear-gradient(150deg,#2e5fa3 0%,#1e3f6e 38%,#0f2240 72%,#0a1726 100%);
-    width:100%; height:100vh;
-    display:flex; flex-direction:column; justify-content:space-between;
-    padding:48px 56px; position:relative; overflow:hidden;
-    page-break-after:always;
-  }
-  .cover::before { content:''; position:absolute; top:0; left:0; width:5px; height:100%; background:linear-gradient(to bottom,var(--yellow),rgba(252,219,80,0.15)); }
-  .cover-glow  { position:absolute; top:-120px; right:-80px; width:480px; height:480px; background:radial-gradient(circle,rgba(58,108,168,0.35) 0%,transparent 70%); pointer-events:none; }
-  .cover-glow2 { position:absolute; bottom:-60px; left:80px; width:300px; height:300px; background:radial-gradient(circle,rgba(31,158,92,0.08) 0%,transparent 70%); pointer-events:none; }
-  .cover-dots  { position:absolute; top:72px; right:56px; display:grid; grid-template-columns:repeat(7,1fr); gap:11px; opacity:0.09; pointer-events:none; }
-  .cover-dots span { width:3px; height:3px; background:var(--white); border-radius:50%; display:block; }
-  .cover-brand { display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px solid rgba(255,255,255,0.10); padding-bottom:14px; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.35); position:relative; z-index:1; }
-  .cover-brand .brand-name { color:var(--yellow); font-weight:600; letter-spacing:3px; }
-  .cover-body  { margin:auto 0; position:relative; z-index:1; }
-  .cover-eyebrow { font-size:11px; letter-spacing:4px; text-transform:uppercase; color:rgba(252,219,80,0.75); margin-bottom:22px; font-weight:500; display:flex; align-items:center; gap:12px; }
-  .cover-eyebrow::before { content:''; display:inline-block; width:32px; height:1.5px; background:rgba(252,219,80,0.6); flex-shrink:0; }
-  .cover-title { font-size:clamp(60px,9.5vw,108px); font-weight:300; letter-spacing:-2.5px; line-height:0.93; color:var(--white); }
-  .cover-title strong { font-weight:700; background:linear-gradient(90deg,#ffffff 0%,#fcdb50 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-  .cover-subtitle { font-size:11px; font-weight:400; margin-top:18px; color:rgba(255,255,255,0.35); letter-spacing:3.5px; text-transform:uppercase; }
-  .cover-client-box { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.10); border-left:3px solid rgba(252,219,80,0.6); border-radius:10px; padding:22px 28px; margin-top:44px; display:inline-block; }
-  .cover-client-box .label { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:rgba(252,219,80,0.6); margin-bottom:6px; }
-  .cover-client-box .client-name { font-size:23px; font-weight:600; color:var(--white); line-height:1.2; }
-  .cover-client-box .client-meta { font-size:12px; color:rgba(255,255,255,0.38); margin-top:5px; }
-  .cover-pills { display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; }
-  .cover-pill  { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius:20px; padding:4px 13px; font-size:10px; letter-spacing:0.5px; color:rgba(255,255,255,0.5); }
-  .cover-pill.accent { background:rgba(252,219,80,0.10); border-color:rgba(252,219,80,0.30); color:rgba(252,219,80,0.85); }
-
-  /* caja resumen ahorro portada */
-  .cover-savings { display:flex; gap:16px; margin-top:28px; }
-  .cs-box { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.10); border-radius:8px; padding:14px 20px; flex:1; }
-  .cs-label { font-size:8px; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:4px; }
-  .cs-value { font-size:22px; font-weight:700; color:var(--yellow); line-height:1; }
-  .cs-sub   { font-size:9px; color:rgba(255,255,255,0.28); margin-top:3px; }
-  .cs-box.green .cs-value { color:#4fe69a; }
-
-  .cover-footer { border-top:1px solid rgba(255,255,255,0.08); padding-top:14px; display:flex; justify-content:space-between; font-size:11px; color:rgba(255,255,255,0.25); position:relative; z-index:1; }
-  .cover-watermark { position:absolute; right:-20px; bottom:-10px; font-size:200px; font-weight:700; color:rgba(255,255,255,0.025); line-height:1; writing-mode:vertical-rl; letter-spacing:-8px; pointer-events:none; user-select:none; }
-
-  /* ══ PÁGINA INTERIOR ══ */
-  .page { padding:28px 44px 20px; page-break-before:always; }
-  .page-header { display:flex; justify-content:space-between; align-items:center; border-top:2px solid var(--blue); border-bottom:1px solid var(--warm-mid); padding:6px 0; margin-bottom:14px; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-soft); }
-  .page-header .ph-brand { color:var(--blue); font-weight:600; }
-
-  h2.section-title { font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--blue); margin:12px 0 7px; padding-bottom:4px; border-bottom:2px solid var(--blue-pale); }
-
-  /* CUPS bar */
-  .cups-box { background:var(--blue); color:var(--white); border-radius:5px; padding:8px 14px; font-size:11px; font-weight:500; letter-spacing:0.5px; margin:0 0 11px; display:flex; justify-content:space-between; align-items:center; }
-  .cups-box .cups-label   { font-size:8px; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.5); }
-  .cups-box .cups-provider{ font-size:9px; color:rgba(255,255,255,0.55); }
-
-  /* data strip */
-  .data-strip { display:flex; align-items:stretch; background:var(--warm-light); border-radius:6px; border-left:3px solid var(--blue-mid); margin-bottom:12px; overflow:hidden; }
-  .ds-item  { flex:1; display:flex; flex-direction:column; justify-content:center; padding:8px 12px; gap:2px; }
-  .ds-sep   { width:1px; background:var(--warm-mid); margin:6px 0; flex-shrink:0; }
-  .ds-label { font-size:7.5px; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-soft); }
-  .ds-value { font-size:11px; font-weight:600; color:var(--text); line-height:1.25; }
-  .ds-sub   { font-size:8.5px; color:#8a93a0; }
-
-  /* GRÁFICA */
-  .chart-wrap  { background:var(--warm-light); border-radius:6px; padding:12px 18px 10px; margin-bottom:12px; }
-  .chart-title { font-size:8px; letter-spacing:2px; text-transform:uppercase; color:var(--text-soft); margin-bottom:12px; font-weight:600; }
-  .chart-bars  { display:flex; align-items:flex-end; gap:20px; height:84px; justify-content:center; }
-  .bar-col   { flex:1; max-width:120px; display:flex; flex-direction:column; align-items:center; gap:4px; height:100%; justify-content:flex-end; }
-  .bar-value { font-size:11px; font-weight:700; color:var(--text); }
-  .bar-fill  { width:100%; border-radius:2px 2px 0 0; }
-  .bar-p1    { background:var(--amber); }
-  .bar-p2    { background:var(--blue-mid); }
-  .bar-p3    { background:var(--green); }
-  .bar-label { font-size:10px; font-weight:700; color:var(--text-soft); margin-top:4px; }
-  .bar-kwh   { font-size:9px; color:#aab0bc; }
-  .chart-note { font-size:9px; color:var(--text-soft); margin-top:8px; border-top:1px solid var(--warm-mid); padding-top:7px; line-height:1.55; }
-
-  /* COMPARATIVA */
-  .comp-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:8px; }
-  .comp-col  { border-radius:6px; overflow:hidden; box-shadow:0 1px 6px rgba(30,63,110,0.07); }
-  .comp-col.cur  .comp-head  { background:var(--warm-mid); color:var(--text-soft); }
-  .comp-col.cur  .comp-body  { background:var(--warm-light); }
-  .comp-col.cur  .comp-sub   { background:var(--warm-dark); color:var(--text); }
-  .comp-col.cur  .comp-total { background:var(--warm-dark); color:var(--text); }
-  .comp-col.prop .comp-head  { background:var(--blue); color:var(--white); }
-  .comp-col.prop .comp-body  { background:var(--blue-pale); }
-  .comp-col.prop .comp-sub   { background:var(--blue-mid); color:var(--white); }
-  .comp-col.prop .comp-total { background:var(--blue); color:var(--yellow); }
-  .comp-head  { padding:8px 12px; font-weight:600; font-size:10.5px; }
-  .comp-brand { font-weight:300; font-size:9px; margin-top:1px; opacity:0.65; }
-  .comp-sec   { font-size:7px; letter-spacing:1.5px; text-transform:uppercase; padding:5px 12px 2px; font-weight:700; }
-  .comp-col.cur  .comp-sec { color:#8a93a0; }
-  .comp-col.prop .comp-sec { color:var(--blue-mid); }
-  .comp-row  { display:grid; grid-template-columns:22px 1fr auto; font-size:9.5px; padding:3px 12px; align-items:center; }
-  .comp-col.cur  .comp-row { border-bottom:1px solid var(--warm-mid); }
-  .comp-col.prop .comp-row { border-bottom:1px solid #d0ddef; }
-  .comp-row .p { font-weight:700; color:var(--text-soft); }
-  .comp-row .r { color:#aab0bc; font-size:8.5px; }
-  .comp-row .a { font-weight:600; text-align:right; }
-  .comp-sub  { display:flex; justify-content:space-between; padding:4px 12px; font-weight:700; font-size:9.5px; }
-  .comp-xrow { display:flex; justify-content:space-between; padding:3px 12px; font-size:9.5px; }
-  .comp-col.cur  .comp-xrow { border-bottom:1px solid var(--warm-mid); color:var(--text-soft); }
-  .comp-col.prop .comp-xrow { border-bottom:1px solid #d0ddef; color:#3a5a80; }
-  .comp-xrow.good  { color:var(--green) !important; font-weight:600; }
-  .comp-xrow.total { font-weight:700; color:var(--text) !important; }
-  .comp-total { display:flex; justify-content:space-between; padding:8px 12px; font-weight:700; font-size:16px; }
-
-  .footnote { font-size:8.5px; color:#aab0bc; margin-bottom:10px; line-height:1.5; }
-
-  /* AHORRO STRIP */
-  .ahorro-strip { background:linear-gradient(120deg,#1e3f6e 0%,#0f2240 100%); border-radius:8px; padding:12px 18px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; margin-bottom:10px; text-align:center; }
-  .ah-item { padding:0 14px; border-right:1px solid rgba(255,255,255,0.08); }
-  .ah-item:last-child { border-right:none; }
-  .ah-label { font-size:8px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:4px; }
-  .ah-value { font-size:21px; font-weight:700; color:var(--yellow); line-height:1; }
-  .ah-value.green { color:#4fe69a; }
-  .ah-sub   { font-size:8.5px; color:rgba(255,255,255,0.28); margin-top:3px; }
-
-  /* FOOTER */
-  footer { background:linear-gradient(90deg,#0d1f38 0%,#1a3560 100%); color:rgba(255,255,255,0.38); padding:10px 44px; display:flex; justify-content:space-between; align-items:center; font-size:10px; border-top:3px solid rgba(252,219,80,0.45); }
-  footer .brand    { color:var(--yellow); font-weight:600; letter-spacing:1px; }
-  footer .validity { text-align:right; font-size:9px; }
-
-  /* PRINT */
-  @media print {
-    @page { size:A4; margin:0; }
-    * { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
-    body { background:white; }
-    .cover { width:210mm; height:297mm; page-break-after:always; padding:38mm 16mm 14mm; }
-    .cover-title { font-size:72pt; }
-    .page  { width:210mm; min-height:297mm; padding:10mm 13mm 8mm; page-break-before:always; }
-    footer { padding:8px 13mm; }
-    .comp-col { box-shadow:none; }
-  }
-  @media (max-width:640px) {
-    .cover { padding:28px 22px; height:auto; min-height:100vh; }
-    .page  { padding:24px 18px; }
-    .comp-grid { grid-template-columns:1fr; }
-    .ahorro-strip { grid-template-columns:1fr; padding:16px; }
-    .ah-item { border-right:none; border-bottom:1px solid rgba(255,255,255,0.08); padding:0 0 10px; margin-bottom:10px; }
-    .ah-item:last-child { border:none; margin:0; padding:0; }
-    .cover-savings { flex-direction:column; }
-    footer { flex-direction:column; gap:6px; text-align:center; }
-  }
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
 </head>
 <body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <style>
+    body{margin:0;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+    *{box-sizing:border-box;}
+    @keyframes idPulse{0%{box-shadow:0 0 0 0 rgba(201,138,52,.55)}70%{box-shadow:0 0 0 8px rgba(201,138,52,0)}100%{box-shadow:0 0 0 0 rgba(201,138,52,0)}}
+    doc-page:not(:defined){visibility:hidden;}
+  </style>
+  <script src="./doc-page.js"></script>
+</helmet>
 
-<!-- ══════════════ PORTADA ══════════════ -->
-<div class="cover">
-  <div class="cover-glow"></div>
-  <div class="cover-glow2"></div>
-  <div class="cover-dots">
-    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+<doc-page size="a4" orientation="landscape">
+
+<!-- PAGE 1 — HERO -->
+<section class="page" style="background:#17191A;color:#E7E4DB;display:flex;flex-direction:column;justify-content:space-between;padding:52px 60px;font-family:Inter,sans-serif;position:relative;">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;">
+    <div style="font-family:Archivo,sans-serif;font-weight:800;font-size:46px;letter-spacing:-.02em;">ingedás<span style="color:#C98A34;">.</span></div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;color:#9AA0A0;text-align:right;text-transform:uppercase;line-height:1.5;margin-top:8px;">Dossier corporativo<br><br>2026 · Vega Baja, Alicante</div>
   </div>
-  <div class="cover-brand">
-    <span class="brand-name">Ingedás</span>
-    <span>Estudio de Electricidad · 2026</span>
-  </div>
-  <div class="cover-body">
-    <div class="cover-eyebrow">Propuesta de optimización energética</div>
-    <div class="cover-title">Estudio<br><strong>Eléctrico</strong></div>
-    <div class="cover-subtitle">Análisis &nbsp;·&nbsp; Comparativa &nbsp;·&nbsp; Ahorro</div>
-    <div class="cover-client-box">
-      <div class="label">Cliente</div>
-      <div class="client-name">María Cristina Ramírez Díaz</div>
-      <div class="client-meta">NIF 74235262W &nbsp;·&nbsp; Calle Baleares 14 B-4, Guardamar del Segura · Calle José Mª Puchaes 33, Benferri</div>
-      <div class="cover-pills">
-        <span class="cover-pill accent">Tarifa 2.0TD</span>
-        <span class="cover-pill">5,75 kW contratados</span>
-        <span class="cover-pill">2 suministros</span>
-        <span class="cover-pill">Gana Energía</span>
-      </div>
+  <div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#C98A34;font-weight:500;display:inline-flex;align-items:center;gap:10px;">
+      <span style="width:26px;height:1px;background:currentColor;opacity:.7;"></span>Consultoría &amp; correduría energética
     </div>
-    <div class="cover-savings">
-      <div class="cs-box">
-        <div class="cs-label">Ahorro estimado anual</div>
-        <div class="cs-value">~218 €</div>
-        <div class="cs-sub">Suma de los dos suministros</div>
-      </div>
-      <div class="cs-box green">
-        <div class="cs-label">Reducción media</div>
-        <div class="cs-value green">−12,7%</div>
-        <div class="cs-sub">Sobre el importe total actual</div>
-      </div>
-      <div class="cs-box">
-        <div class="cs-label">Sin coste de servicio</div>
-        <div class="cs-value" style="font-size:15px;padding-top:4px;">0,00 €</div>
-        <div class="cs-sub">Gestión incluida sin cargo</div>
-      </div>
+    <h1 style="font-family:Archivo,sans-serif;font-weight:800;font-size:76px;letter-spacing:-.03em;line-height:.94;margin:20px 0 0;">Gestión<br><br><span style="font-weight:500;color:#C7C1B4;">inteligente de tu</span> energía</h1>
+    <p style="margin:24px 0 0;font-size:19px;max-width:44ch;font-weight:500;line-height:1.4;">No compramos a ciegas. Convertimos los datos de tu consumo en <b style="color:#D8A65B;font-weight:600;">decisiones de mercado</b> que blindan tu cuenta de resultados.</p>
+  </div>
+  <div style="position:absolute;bottom:20px;right:24px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9AA0A0;letter-spacing:.05em;">01 / 10</div>
+</section>
+
+<!-- PAGE 2 — NOSOTROS -->
+<section class="page" style="background:#ECE9E1;color:#22231F;display:flex;flex-direction:column;padding:52px 60px;font-family:Inter,sans-serif;position:relative;">
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#2C635B;font-weight:500;display:inline-flex;align-items:center;gap:10px;"><span style="width:26px;height:1px;background:currentColor;opacity:.7;"></span>Quiénes somos</div>
+  <h2 style="font-family:Archivo,sans-serif;font-weight:700;font-size:38px;letter-spacing:-.02em;margin:16px 0 24px;">Ingeniería aplicada a tu factura energética</h2>
+  <div style="display:flex;align-items:baseline;gap:22px;margin-bottom:28px;">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:66px;font-weight:600;color:#C98A34;letter-spacing:-.03em;line-height:1;">+10<span style="font-size:.32em;color:#5B584F;margin-left:6px;">años</span></div>
+    <div style="font-size:14px;color:#5B584F;line-height:1.42;max-width:28ch;">Operando en el mercado libre de energía, acompañando a pymes y agroindustria de la Vega Baja.</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:start;flex:1;">
+    <div style="display:flex;flex-direction:column;gap:16px;font-size:15.5px;line-height:1.62;color:#22231F;">
+      <p>Somos una consultora energética independiente con base en la Vega Baja, en el eje Alicante–Murcia. Trabajamos para pymes, comunidades y clientes agroindustriales que necesitan una cosa: <b style="font-weight:600;">gastar menos y comprar mejor</b>, con criterio técnico y no con la oferta de turno.</p>
+      <p>Analizamos el mercado mayorista — OMIE, futuros, reservas de gas de la UE — y negociamos con las principales comercializadoras para que cierres al mejor momento y precio. Después no desaparecemos: <b style="font-weight:600;">monitorizamos tu consumo y el mercado de forma continua</b> para mantenerte siempre en la posición más ventajosa.</p>
+      <p>Cada kW cuenta porque se traduce en energía, en coste y en huella. Nuestro trabajo es que esos tres números jueguen a favor de tu negocio.</p>
+    </div>
+    <div style="background:#F6F4EF;border:1px solid rgba(23,25,26,.14);padding:28px;">
+      <h4 style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:#2C635B;font-weight:500;margin:0 0 16px;">Ingedás en cifras</h4>
+      <div style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;font-size:14.5px;"><span style="color:#5B584F;">Cartera activa</span><span style="font-family:'IBM Plex Mono',monospace;font-weight:500;">1.000 clientes</span></div>
+      <div style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid rgba(23,25,26,.14);font-size:14.5px;"><span style="color:#5B584F;">Contratos activos</span><span style="font-family:'IBM Plex Mono',monospace;font-weight:500;">+1600</span></div>
+      <div style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid rgba(23,25,26,.14);font-size:14.5px;"><span style="color:#5B584F;">Contratos gestionados</span><span style="font-family:'IBM Plex Mono',monospace;font-weight:500;">~1.000</span></div>
+      <div style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid rgba(23,25,26,.14);font-size:14.5px;"><span style="color:#5B584F;">Energía gestionada</span><span style="font-family:'IBM Plex Mono',monospace;font-weight:500;">+80 GWh</span></div>
+      <div style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid rgba(23,25,26,.14);font-size:14.5px;"><span style="color:#5B584F;">Ámbito</span><span style="font-family:'IBM Plex Mono',monospace;font-weight:500;">Alicante · Murcia</span></div>
+      <div style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid rgba(23,25,26,.14);font-size:14.5px;"><span style="color:#5B584F;">Sectores</span><span style="font-family:'IBM Plex Mono',monospace;font-weight:500;">Multisector</span></div>
     </div>
   </div>
-  <div class="cover-footer">
+  <div style="position:absolute;bottom:20px;right:24px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#84806F;letter-spacing:.05em;">02 / 10</div>
+</section>
+
+<!-- PAGE 3 — SERVICIOS -->
+<section class="page" style="background:#17191A;color:#E7E4DB;display:flex;flex-direction:column;padding:48px 60px;font-family:Inter,sans-serif;position:relative;">
+  <div style="max-width:760px;">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#D8A65B;font-weight:500;display:inline-flex;align-items:center;gap:10px;"><span style="width:26px;height:1px;background:currentColor;opacity:.7;"></span>Qué hacemos</div>
+    <h2 style="font-family:Archivo,sans-serif;font-weight:700;font-size:32px;letter-spacing:-.02em;color:#E7E4DB;margin:14px 0 12px;">Un servicio integral, del contrato a la certificación</h2>
+    <p style="font-size:14.5px;color:#9AA0A0;line-height:1.6;max-width:62ch;margin:0;">No vendemos "ecología". Vendemos rentabilidad y supervivencia en un mercado volátil. Estas son las palancas con las que trabajamos.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(231,228,219,.16);border:1px solid rgba(231,228,219,.16);margin-top:22px;flex:1;">
+    <div style="background:#17191A;padding:22px 20px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#C98A34;font-weight:600;letter-spacing:.1em;">01</div><h3 style="font-family:Archivo,sans-serif;font-weight:700;font-size:16.5px;margin:12px 0 8px;letter-spacing:-.01em;">Compra y optimización de energía</h3><p style="font-size:12.8px;color:#9AA0A0;line-height:1.5;margin:0;">Auditamos histórico de consumo, potencias y contratos. Contratamos luz y gas en el momento y al precio adecuados.</p></div>
+    <div style="background:#17191A;padding:22px 20px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#C98A34;font-weight:600;letter-spacing:.1em;">02</div><h3 style="font-family:Archivo,sans-serif;font-weight:700;font-size:16.5px;margin:12px 0 8px;letter-spacing:-.01em;">Monitorización de consumos</h3><p style="font-size:12.8px;color:#9AA0A0;line-height:1.5;margin:0;">Digitalizamos cada punto de suministro (CUPS) en cuadros de mando. Detectamos fugas de rentabilidad antes de la factura.</p></div>
+    <div style="background:#17191A;padding:22px 20px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#C98A34;font-weight:600;letter-spacing:.1em;">03</div><h3 style="font-family:Archivo,sans-serif;font-weight:700;font-size:16.5px;margin:12px 0 8px;letter-spacing:-.01em;">Autoconsumo colectivo</h3><p style="font-size:12.8px;color:#9AA0A0;line-height:1.5;margin:0;">Diseñamos y tramitamos proyectos de autoconsumo, individual y colectivo, para estabilizar tu coste a largo plazo.</p></div>
+    <div style="background:#17191A;padding:22px 20px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#C98A34;font-weight:600;letter-spacing:.1em;">04</div><h3 style="font-family:Archivo,sans-serif;font-weight:700;font-size:16.5px;margin:12px 0 8px;letter-spacing:-.01em;">Huella de carbono</h3><p style="font-size:12.8px;color:#9AA0A0;line-height:1.5;margin:0;">Calculamos y reducimos tu huella de CO₂ y gestionamos tu inscripción en el registro MITECO.</p></div>
+    <div style="background:#17191A;padding:22px 20px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#C98A34;font-weight:600;letter-spacing:.1em;">05</div><h3 style="font-family:Archivo,sans-serif;font-weight:700;font-size:16.5px;margin:12px 0 8px;letter-spacing:-.01em;">Sistemas de gestión ISO</h3><p style="font-size:12.8px;color:#9AA0A0;line-height:1.5;margin:0;">Implantación de ISO 50001 (energía) e ISO 14001:2026 (ambiental), dentro de plazo.</p></div>
+    <div style="background:#17191A;padding:22px 20px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#C98A34;font-weight:600;letter-spacing:.1em;">06</div><h3 style="font-family:Archivo,sans-serif;font-weight:700;font-size:16.5px;margin:12px 0 8px;letter-spacing:-.01em;">Subvenciones y calidad</h3><p style="font-size:12.8px;color:#9AA0A0;line-height:1.5;margin:0;">Tramitamos ayudas (Next Generation, FNEE, PREE, CAE, RD 638/2026) y la certificación SICTED.</p></div>
+  </div>
+  <div style="position:absolute;bottom:20px;right:24px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9AA0A0;letter-spacing:.05em;">03 / 10</div>
+</section>
+
+<!-- PAGE 4 — INTELIGENCIA DE MERCADO -->
+<section class="page" style="background:linear-gradient(180deg,#141618,#191d20);color:#E7E4DB;display:flex;flex-direction:column;padding:48px 60px;font-family:Inter,sans-serif;position:relative;">
+  <div style="max-width:760px;">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#D8A65B;font-weight:500;display:inline-flex;align-items:center;gap:10px;"><span style="width:26px;height:1px;background:currentColor;opacity:.7;"></span>Nuestra ventaja</div>
+    <h2 style="font-family:Archivo,sans-serif;font-weight:700;font-size:32px;letter-spacing:-.02em;margin:14px 0 12px;">Inteligencia de mercado, no intuición</h2>
+    <p style="font-size:14px;color:#9AA0A0;line-height:1.58;max-width:64ch;margin:0;">Un comercial te ofrece una tarifa. Nosotros leemos el mercado que hay detrás: el pool eléctrico, los futuros del gas y el nivel de reservas europeas. Ese es el criterio con el que decidimos cuándo firmas.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:1.15fr .85fr;gap:24px;margin-top:20px;flex:1;">
+    <div style="background:#20242A;border:1px solid rgba(231,228,219,.16);padding:22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:#9AA0A0;font-weight:500;">Precio mercado diario · OMIE</span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;color:#C98A34;display:inline-flex;align-items:center;gap:7px;text-transform:uppercase;"><span style="width:7px;height:7px;border-radius:50%;background:#C98A34;display:inline-block;animation:idPulse 2.4s infinite;"></span>Seguimiento diario</span>
+      </div>
+      <svg viewBox="0 0 620 200" width="100%" aria-hidden="true">
+        <g stroke="#2A2F35" stroke-width="1"><line x1="0" y1="30" x2="620" y2="30"></line><line x1="0" y1="85" x2="620" y2="85"></line><line x1="0" y1="140" x2="620" y2="140"></line><line x1="0" y1="195" x2="620" y2="195"></line></g>
+        <path d="M0,160 L52,150 L103,170 L155,125 L207,142 L258,100 L310,118 L362,80 L413,100 L465,60 L517,86 L568,50 L620,70 L620,200 L0,200 Z" fill="#2C635B" fill-opacity="0.14"></path>
+        <path d="M0,160 L52,150 L103,170 L155,125 L207,142 L258,100 L310,118 L362,80 L413,100 L465,60 L517,86 L568,50 L620,70" fill="none" stroke="#C98A34" stroke-width="2.5"></path>
+        <circle cx="568" cy="50" r="4.5" fill="#C98A34"></circle>
+        <circle cx="568" cy="50" r="9" fill="#C98A34" fill-opacity="0.25"></circle>
+      </svg>
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9AA0A0;margin-top:10px;"><span>Ventana analizada</span><span><b style="color:#E7E4DB;font-weight:500;">10.046</b> registros horarios en base de datos</span></div>
+      <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9AA0A0;margin-top:16px;line-height:1.55;">// Pipeline propio de precios OMIE con carga diaria. No estimamos el mercado: lo medimos.</p>
+    </div>
+    <div style="background:#20242A;border:1px solid rgba(231,228,219,.16);padding:22px;display:flex;flex-direction:column;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:#9AA0A0;font-weight:500;">Reservas &amp; futuros de gas</span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;color:#C98A34;text-transform:uppercase;">UE · AGSI+</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div><div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#9AA0A0;margin-bottom:6px;"><span>Almacenamiento subterráneo UE</span><b style="color:#E7E4DB;font-weight:500;">~58%</b></div><div style="height:9px;background:#2A2F35;border-radius:20px;overflow:hidden;"><i style="display:block;height:100%;width:58%;border-radius:20px;background:linear-gradient(90deg,#2C635B,#C98A34);"></i></div></div>
+        <div><div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#9AA0A0;margin-bottom:6px;"><span>Cobertura invierno estimada</span><b style="color:#E7E4DB;font-weight:500;">Media</b></div><div style="height:9px;background:#2A2F35;border-radius:20px;overflow:hidden;"><i style="display:block;height:100%;width:64%;border-radius:20px;background:linear-gradient(90deg,#2C635B,#C98A34);"></i></div></div>
+        <div><div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#9AA0A0;margin-bottom:6px;"><span>Tendencia futuros (curva)</span><b style="color:#E7E4DB;font-weight:500;">Vigilancia</b></div><div style="height:9px;background:#2A2F35;border-radius:20px;overflow:hidden;"><i style="display:block;height:100%;width:47%;border-radius:20px;background:linear-gradient(90deg,#2C635B,#C98A34);"></i></div></div>
+      </div>
+      <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9AA0A0;margin-top:16px;line-height:1.55;">// Cruzamos el nivel de reservas europeas con la curva de futuros para anticipar el mejor momento de contratación de gas.</p>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(231,228,219,.16);border:1px solid rgba(231,228,219,.16);margin-top:20px;">
+    <div style="background:#17191A;padding:16px 18px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:600;color:#fff;letter-spacing:-.02em;">OMIE</div><div style="font-size:11.5px;color:#9AA0A0;margin-top:5px;line-height:1.3;">Seguimiento del pool eléctrico diario</div></div>
+    <div style="background:#17191A;padding:16px 18px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:600;color:#fff;letter-spacing:-.02em;">AGSI+</div><div style="font-size:11.5px;color:#9AA0A0;margin-top:5px;line-height:1.3;">Reservas de gas subterráneo de la UE</div></div>
+    <div style="background:#17191A;padding:16px 18px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:600;color:#fff;letter-spacing:-.02em;">Looker</div><div style="font-size:11.5px;color:#9AA0A0;margin-top:5px;line-height:1.3;">Cuadros de mando de consumo por cliente</div></div>
+    <div style="background:#17191A;padding:16px 18px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:600;color:#fff;letter-spacing:-.02em;">175<span style="color:#C98A34;font-size:.5em;margin-left:2px;">liq.</span></div><div style="font-size:11.5px;color:#9AA0A0;margin-top:5px;line-height:1.3;">Liquidaciones y seguimiento continuo</div></div>
+  </div>
+  <div style="position:absolute;bottom:20px;right:24px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9AA0A0;letter-spacing:.05em;">04 / 10</div>
+</section>
+
+<!-- PAGE 5 — METODOLOGÍA -->
+<section class="page" style="background:#C7C1B4;color:#22231F;display:flex;flex-direction:column;padding:52px 60px;font-family:Inter,sans-serif;position:relative;">
+  <div style="max-width:760px;">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#1F4B45;font-weight:500;display:inline-flex;align-items:center;gap:10px;"><span style="width:26px;height:1px;background:currentColor;opacity:.7;"></span>Cómo trabajamos</div>
+    <h2 style="font-family:Archivo,sans-serif;font-weight:700;font-size:34px;letter-spacing:-.02em;margin:14px 0 12px;">Metodología de control total</h2>
+    <p style="font-size:14.5px;color:#4c493f;line-height:1.6;margin:0;">Cuatro fases. Ninguna consultoría de "una sola vez": la cuarta no termina nunca.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:36px;flex:1;">
+    <div style="padding:0 26px 0 0;border-top:2px solid #17191A;padding-top:26px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#C98A34;font-weight:600;letter-spacing:.06em;">FASE 01</div><h3 style="font-family:Archivo,sans-serif;font-weight:700;font-size:18px;margin:12px 0 10px;letter-spacing:-.01em;">Análisis exhaustivo</h3><p style="font-size:13.5px;color:#4c493f;line-height:1.55;margin:0;">Auditamos tu histórico de kW, tus contratos y las ineficiencias de tu operativa. No adivinamos: identificamos con datos dónde se fuga tu rentabilidad.</p></div>
+    <div style="padding:0 26px 0 0;border-top:2px solid #17191A;padding-top:26px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#C98A34;font-weight:600;letter-spacing:.06em;">FASE 02</div><h3 style="font-family:Archivo,sans-serif;font-weight:700;font-size:18px;margin:12px 0 10px;letter-spacing:-.01em;">Estrategia y propuesta</h3><p style="font-size:13.5px;color:#4c493f;line-height:1.55;margin:0;">Diseñamos una hoja de ruta de costes y seleccionamos las mejores opciones del mercado, alineando el momento de contratación con la señal de precio.</p></div>
+    <div style="padding:0 26px 0 0;border-top:2px solid #17191A;padding-top:26px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#C98A34;font-weight:600;letter-spacing:.06em;">FASE 03</div><h3 style="font-family:Archivo,sans-serif;font-weight:700;font-size:18px;margin:12px 0 10px;letter-spacing:-.01em;">Contratación</h3><p style="font-size:13.5px;color:#4c493f;line-height:1.55;margin:0;">Negociamos y cerramos con la comercializadora adecuada. Nos ocupamos de la tramitación, el cambio de titular y toda la gestión documental.</p></div>
+    <div style="padding:0 0 0 0;border-top:2px solid #17191A;padding-top:26px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#C98A34;font-weight:600;letter-spacing:.06em;">FASE 04</div><h3 style="font-family:Archivo,sans-serif;font-weight:700;font-size:18px;margin:12px 0 10px;letter-spacing:-.01em;">Seguimiento activo</h3><p style="font-size:13.5px;color:#4c493f;line-height:1.55;margin:0;">Monitorizamos tus consumos y las variaciones del mercado de forma continua, ajustando la estrategia para que nunca dejes de estar en ventaja.</p></div>
+  </div>
+  <div style="margin-top:auto;padding-top:32px;border-top:1px solid rgba(23,25,26,.18);display:flex;justify-content:space-between;align-items:center;gap:40px;">
+    <p style="font-family:Archivo,sans-serif;font-weight:600;font-size:20px;letter-spacing:-.01em;color:#17191A;max-width:34ch;line-height:1.3;margin:0;">La fase 4 no cierra el proyecto. Es la que sostiene el ahorro en el tiempo.</p>
+    <div style="display:flex;gap:36px;flex-shrink:0;">
+      <div><div style="font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:600;color:#1F4B45;letter-spacing:-.02em;">+500</div><div style="font-size:12px;color:#4c493f;margin-top:4px;">Liquidaciones revisadas</div></div>
+      <div><div style="font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:600;color:#1F4B45;letter-spacing:-.02em;">Diario</div><div style="font-size:12px;color:#4c493f;margin-top:4px;">Seguimiento de mercado</div></div>
+    </div>
+  </div>
+  <div style="position:absolute;bottom:20px;right:24px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5B584F;letter-spacing:.05em;">05 / 10</div>
+</section>
+
+<!-- PAGE 6 — SOSTENIBILIDAD -->
+<section class="page" style="background:#1F4B45;color:#E9EEEB;display:flex;flex-direction:column;padding:52px 60px;font-family:Inter,sans-serif;position:relative;">
+  <div style="max-width:760px;">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#D8A65B;font-weight:500;display:inline-flex;align-items:center;gap:10px;"><span style="width:26px;height:1px;background:currentColor;opacity:.7;"></span>Sostenibilidad energética</div>
+    <h2 style="font-family:Archivo,sans-serif;font-weight:700;font-size:34px;letter-spacing:-.02em;color:#F2F5F2;margin:14px 0 12px;">Menos coste y menos emisiones son la misma hoja de ruta</h2>
+    <p style="font-size:14.5px;color:#C7D6D2;line-height:1.6;max-width:66ch;margin:0;">Optimizar tu factura y reducir tu huella de carbono no son proyectos separados: nacen del mismo análisis de consumo. Así lo llevamos de la teoría a la certificación.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:36px;flex:1;">
+    <div style="border-top:2px solid #E9EEEB;padding-top:24px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#D8A65B;font-weight:600;letter-spacing:.06em;">MEDICIÓN</div>
+      <h3 style="font-family:Archivo,sans-serif;font-weight:700;font-size:19px;margin:14px 0 10px;letter-spacing:-.01em;color:#F2F5F2;">Huella de carbono, alcance 1-2-3</h3>
+      <p style="font-size:13.8px;color:#C7D6D2;line-height:1.55;margin:0;">Calculamos tus emisiones directas, indirectas y de cadena de valor, y gestionamos tu inscripción en el registro MITECO como base para cualquier plan de reducción.</p>
+    </div>
+    <div style="border-top:2px solid #E9EEEB;padding-top:24px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#D8A65B;font-weight:600;letter-spacing:.06em;">INSTRUMENTACIÓN</div>
+      <h3 style="font-family:Archivo,sans-serif;font-weight:700;font-size:19px;margin:14px 0 10px;letter-spacing:-.01em;color:#F2F5F2;">Equipos de medida y control</h3>
+      <p style="font-size:13.8px;color:#C7D6D2;line-height:1.55;margin:0;">Instalamos equipos de medida y telemedida en los puntos relevantes de tu instalación y volcamos sus registros a cuadros de mando. Lo que no se mide no se controla, y lo que no se controla no se puede reducir: el dato es la condición previa al ahorro y a cualquier reducción de emisiones verificable.</p>
+    </div>
+    <div style="border-top:2px solid #E9EEEB;padding-top:24px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#D8A65B;font-weight:600;letter-spacing:.06em;">CERTIFICACIÓN</div>
+      <h3 style="font-family:Archivo,sans-serif;font-weight:700;font-size:19px;margin:14px 0 10px;letter-spacing:-.01em;color:#F2F5F2;">ISO 14001:2026 e ISO 50001</h3>
+      <p style="font-size:13.8px;color:#C7D6D2;line-height:1.55;margin:0;">Acompañamos la implantación de ambos sistemas de gestión — ambiental y energético — para convertir la descarbonización en un proceso auditable, no en una declaración de intenciones.</p>
+    </div>
+  </div>
+  <div style="background:rgba(233,238,235,.08);border:1px solid rgba(233,238,235,.2);padding:20px 26px;margin-top:8px;">
+    <p style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#C7D6D2;line-height:1.6;margin:0;">// El mismo dato que usamos para negociar tu contrato de energía es el que alimenta tu informe de huella de carbono. Un único punto de verdad para el coste y para la sostenibilidad.</p>
+  </div>
+  <div style="position:absolute;bottom:20px;right:24px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#A9BDB8;letter-spacing:.05em;">06 / 10</div>
+</section>
+
+<!-- PAGE 7 — INGENIERÍA E INSTALACIONES -->
+<section class="page" style="background:#17191A;color:#E7E4DB;display:flex;flex-direction:column;padding:48px 60px;font-family:Inter,sans-serif;position:relative;">
+  <div style="max-width:760px;">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#D8A65B;font-weight:500;display:inline-flex;align-items:center;gap:10px;"><span style="width:26px;height:1px;background:currentColor;opacity:.7;"></span>Ingeniería e instalaciones</div>
+    <h2 style="font-family:Archivo,sans-serif;font-weight:700;font-size:32px;letter-spacing:-.02em;color:#E7E4DB;margin:14px 0 12px;">Del proyecto a la puesta en marcha</h2>
+    <p style="font-size:14.5px;color:#9AA0A0;line-height:1.6;max-width:64ch;margin:0;">Además del asesoramiento de mercado, ejecutamos. Proyectamos, legalizamos y mantenemos las instalaciones que hacen posible el ahorro que recomendamos.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(231,228,219,.16);border:1px solid rgba(231,228,219,.16);margin-top:26px;flex:1;">
+    <div style="background:#17191A;padding:26px 24px;display:flex;flex-direction:column;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#C98A34;font-weight:600;letter-spacing:.1em;">01</div>
+      <h3 style="font-family:Archivo,sans-serif;font-weight:700;font-size:18px;margin:14px 0 10px;letter-spacing:-.01em;">Solar fotovoltaica</h3>
+      <p style="font-size:13px;color:#9AA0A0;line-height:1.55;margin:0 0 16px;">Diseño, tramitación e instalación de autoconsumo fotovoltaico, individual y colectivo, dimensionado sobre tu curva real de consumo.</p>
+      <div style="margin-top:auto;display:flex;flex-direction:column;">
+        <div style="border-top:1px solid rgba(231,228,219,.16);padding:9px 0 9px 20px;position:relative;font-size:12.5px;color:#E7E4DB;"><span style="position:absolute;left:0;color:#C98A34;">→</span>Estudio de producción y dimensionado</div>
+        <div style="border-top:1px solid rgba(231,228,219,.16);padding:9px 0 9px 20px;position:relative;font-size:12.5px;color:#E7E4DB;"><span style="position:absolute;left:0;color:#C98A34;">→</span>Legalización y alta de la instalación</div>
+        <div style="border-top:1px solid rgba(231,228,219,.16);padding:9px 0 9px 20px;position:relative;font-size:12.5px;color:#E7E4DB;"><span style="position:absolute;left:0;color:#C98A34;">→</span>Gestión de ayudas y subvenciones</div>
+      </div>
+    </div>
+    <div style="background:#17191A;padding:26px 24px;display:flex;flex-direction:column;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#C98A34;font-weight:600;letter-spacing:.1em;">02</div>
+      <h3 style="font-family:Archivo,sans-serif;font-weight:700;font-size:18px;margin:14px 0 10px;letter-spacing:-.01em;">Recarga de vehículo eléctrico</h3>
+      <p style="font-size:13px;color:#9AA0A0;line-height:1.55;margin:0 0 16px;">Proyecto, instalación y legalización de puntos de recarga para empresa, comunidad y flota, con la potencia y la gestión de carga correctamente dimensionadas.</p>
+      <div style="margin-top:auto;display:flex;flex-direction:column;">
+        <div style="border-top:1px solid rgba(231,228,219,.16);padding:9px 0 9px 20px;position:relative;font-size:12.5px;color:#E7E4DB;"><span style="position:absolute;left:0;color:#C98A34;">→</span>Proyecto eléctrico y estudio de potencia</div>
+        <div style="border-top:1px solid rgba(231,228,219,.16);padding:9px 0 9px 20px;position:relative;font-size:12.5px;color:#E7E4DB;"><span style="position:absolute;left:0;color:#C98A34;">→</span>Legalización e inspección reglamentaria</div>
+        <div style="border-top:1px solid rgba(231,228,219,.16);padding:9px 0 9px 20px;position:relative;font-size:12.5px;color:#E7E4DB;"><span style="position:absolute;left:0;color:#C98A34;">→</span>Tramitación de ayudas a la movilidad</div>
+      </div>
+    </div>
+    <div style="background:#17191A;padding:26px 24px;display:flex;flex-direction:column;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#C98A34;font-weight:600;letter-spacing:.1em;">03</div>
+      <h3 style="font-family:Archivo,sans-serif;font-weight:700;font-size:18px;margin:14px 0 10px;letter-spacing:-.01em;">Mantenimiento de instalaciones</h3>
+      <p style="font-size:13px;color:#9AA0A0;line-height:1.55;margin:0 0 16px;">Mantenimiento preventivo y correctivo de instalaciones eléctricas y de generación, con seguimiento del rendimiento real frente al proyectado.</p>
+      <div style="margin-top:auto;display:flex;flex-direction:column;">
+        <div style="border-top:1px solid rgba(231,228,219,.16);padding:9px 0 9px 20px;position:relative;font-size:12.5px;color:#E7E4DB;"><span style="position:absolute;left:0;color:#C98A34;">→</span>Revisiones e inspecciones reglamentarias</div>
+        <div style="border-top:1px solid rgba(231,228,219,.16);padding:9px 0 9px 20px;position:relative;font-size:12.5px;color:#E7E4DB;"><span style="position:absolute;left:0;color:#C98A34;">→</span>Plan de mantenimiento preventivo</div>
+        <div style="border-top:1px solid rgba(231,228,219,.16);padding:9px 0 9px 20px;position:relative;font-size:12.5px;color:#E7E4DB;"><span style="position:absolute;left:0;color:#C98A34;">→</span>Atención de averías y correctivos</div>
+      </div>
+    </div>
+  </div>
+  <div style="position:absolute;bottom:20px;right:24px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9AA0A0;letter-spacing:.05em;">07 / 10</div>
+</section>
+
+<!-- PAGE 8 — CASO REAL -->
+<section class="page" style="background:#17191A;color:#E7E4DB;display:flex;align-items:center;padding:52px 60px;font-family:Inter,sans-serif;position:relative;">
+  <div style="display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center;width:100%;">
     <div>
-      <div>Fecha de emisión: 21 de mayo de 2026 &nbsp;·&nbsp; Válido hasta el 27 de mayo de 2026</div>
-      <div style="margin-top:5px;color:rgba(255,255,255,0.18);">Ingedás · Servicios Ingedás, S.L. &nbsp;·&nbsp; Avda. Del Mar 10, 03300 Orihuela (Alicante) &nbsp;·&nbsp; B06816938 &nbsp;·&nbsp; administracion@ingedas.es &nbsp;·&nbsp; www.ingedas.com &nbsp;·&nbsp; 626 119 254</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#C98A34;">Caso real · Agroindustria</div>
+      <h3 style="font-family:Archivo,sans-serif;font-weight:700;font-size:30px;margin:14px 0 18px;letter-spacing:-.02em;color:#E7E4DB;">Gonta de Viveros</h3>
+      <p style="color:#9AA0A0;font-size:14.5px;line-height:1.6;margin:0;">Cliente agroindustrial con un perfil de consumo intensivo y estacional. Partíamos de un contrato heredado, sin analizar, y de una factura que nadie vigilaba.</p>
+      <div style="list-style:none;padding:0;margin:20px 0 0;display:flex;flex-direction:column;">
+        <div style="padding:11px 0 11px 24px;border-top:1px solid rgba(231,228,219,.16);position:relative;font-size:13.5px;color:#E7E4DB;"><span style="position:absolute;left:0;color:#C98A34;">→</span>Análisis del perfil horario de consumo contra el mercado OMIE.</div>
+        <div style="padding:11px 0 11px 24px;border-top:1px solid rgba(231,228,219,.16);position:relative;font-size:13.5px;color:#E7E4DB;"><span style="position:absolute;left:0;color:#C98A34;">→</span>Comparativa multi-comercializadora sobre datos reales, no estimados.</div>
+        <div style="padding:11px 0 11px 24px;border-top:1px solid rgba(231,228,219,.16);position:relative;font-size:13.5px;color:#E7E4DB;"><span style="position:absolute;left:0;color:#C98A34;">→</span>Informe técnico con recomendación de contratación y timing.</div>
+        <div style="padding:11px 0 11px 24px;border-top:1px solid rgba(231,228,219,.16);position:relative;font-size:13.5px;color:#E7E4DB;"><span style="position:absolute;left:0;color:#C98A34;">→</span>Seguimiento posterior del contrato y del mercado.</div>
+      </div>
+    </div>
+    <div style="background:#20242A;border:1px solid rgba(231,228,219,.16);padding:32px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:50px;font-weight:600;color:#C98A34;letter-spacing:-.03em;line-height:1;">506<span style="font-size:.4em;color:#9AA0A0;"> MWh/año</span></div>
+      <div style="font-size:13.5px;color:#9AA0A0;margin-top:12px;">Consumo analizado y optimizado en un único punto agroindustrial.</div>
+      <div style="height:1px;background:rgba(231,228,219,.16);margin:24px 0;"></div>
+      <p style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#9AA0A0;line-height:1.65;margin:0;">// En optimizaciones de contrato como esta, el margen de mejora habitual sobre el término de energía se mueve entre el <b style="color:#C98A34;font-weight:600;">8% y el 15%</b>, dependiendo del punto de partida.</p>
     </div>
   </div>
-  <div class="cover-watermark">ingedás</div>
-</div>
+  <div style="position:absolute;bottom:20px;right:24px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9AA0A0;letter-spacing:.05em;">08 / 10</div>
+</section>
 
-
-<!-- ══════════════ PÁGINA 1 — GUARDAMAR DEL SEGURA ══════════════ -->
-<div class="page">
-  <div class="page-header">
-    <span class="ph-brand">Ingedás · Servicios Ingedás, S.L.</span>
-    <span>Suministro 1 de 2 · Guardamar del Segura</span>
+<!-- PAGE 7 — CLIENTES -->
+<section class="page" style="background:#F6F4EF;color:#22231F;display:flex;flex-direction:column;padding:52px 60px;font-family:Inter,sans-serif;position:relative;">
+  <div style="max-width:760px;">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#2C635B;font-weight:500;display:inline-flex;align-items:center;gap:10px;"><span style="width:26px;height:1px;background:currentColor;opacity:.7;"></span>Confían en nosotros</div>
+    <h2 style="font-family:Archivo,sans-serif;font-weight:700;font-size:32px;letter-spacing:-.02em;margin:14px 0 12px;">Negocios reales de la Vega Baja y más allá</h2>
+    <p style="font-size:14px;color:#5B584F;line-height:1.58;margin:0;">Del sector náutico a la agroalimentación, la hostelería o el socio-sanitario. Una muestra de nuestra cartera activa.</p>
   </div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(23,25,26,.14);border-left:1px solid rgba(23,25,26,.14);margin-top:24px;flex:1;">
+    <div style="border-right:1px solid rgba(23,25,26,.14);border-bottom:1px solid rgba(23,25,26,.14);padding:20px 18px;display:flex;flex-direction:column;justify-content:center;"><div style="font-family:Archivo,sans-serif;font-weight:700;font-size:14.5px;letter-spacing:-.01em;line-height:1.15;">Real Club Náutico de Torrevieja</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#84806F;margin-top:6px;text-transform:uppercase;">Náutico · Torrevieja</div></div>
+    <div style="border-right:1px solid rgba(23,25,26,.14);border-bottom:1px solid rgba(23,25,26,.14);padding:20px 18px;display:flex;flex-direction:column;justify-content:center;"><div style="font-family:Archivo,sans-serif;font-weight:700;font-size:14.5px;letter-spacing:-.01em;line-height:1.15;">Club Náutico Dehesa de Campoamor</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#84806F;margin-top:6px;text-transform:uppercase;">Náutico · Orihuela Costa</div></div>
+    <div style="border-right:1px solid rgba(23,25,26,.14);border-bottom:1px solid rgba(23,25,26,.14);padding:20px 18px;display:flex;flex-direction:column;justify-content:center;"><div style="font-family:Archivo,sans-serif;font-weight:700;font-size:14.5px;letter-spacing:-.01em;line-height:1.15;">Pets World Market</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#84806F;margin-top:6px;text-transform:uppercase;">Retail · San Miguel de Salinas</div></div>
+    <div style="border-right:1px solid rgba(23,25,26,.14);border-bottom:1px solid rgba(23,25,26,.14);padding:20px 18px;display:flex;flex-direction:column;justify-content:center;"><div style="font-family:Archivo,sans-serif;font-weight:700;font-size:14.5px;letter-spacing:-.01em;line-height:1.15;">Alimeco</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#84806F;margin-top:6px;text-transform:uppercase;">Agroalimentario · Torrevieja</div></div>
+    <div style="border-right:1px solid rgba(23,25,26,.14);border-bottom:1px solid rgba(23,25,26,.14);padding:20px 18px;display:flex;flex-direction:column;justify-content:center;"><div style="font-family:Archivo,sans-serif;font-weight:700;font-size:14.5px;letter-spacing:-.01em;line-height:1.15;">Gonta de Viveros</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#84806F;margin-top:6px;text-transform:uppercase;">Agroindustria · Albacete</div></div>
+    <div style="border-right:1px solid rgba(23,25,26,.14);border-bottom:1px solid rgba(23,25,26,.14);padding:20px 18px;display:flex;flex-direction:column;justify-content:center;"><div style="font-family:Archivo,sans-serif;font-weight:700;font-size:14.5px;letter-spacing:-.01em;line-height:1.15;">Fernova Hoteleros</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#84806F;margin-top:6px;text-transform:uppercase;">Hostelería · Orihuela Costa</div></div>
+    <div style="border-right:1px solid rgba(23,25,26,.14);border-bottom:1px solid rgba(23,25,26,.14);padding:20px 18px;display:flex;flex-direction:column;justify-content:center;"><div style="font-family:Archivo,sans-serif;font-weight:700;font-size:14.5px;letter-spacing:-.01em;line-height:1.15;">Doalco</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#84806F;margin-top:6px;text-transform:uppercase;">Industria · Orihuela</div></div>
+    <div style="border-right:1px solid rgba(23,25,26,.14);border-bottom:1px solid rgba(23,25,26,.14);padding:20px 18px;display:flex;flex-direction:column;justify-content:center;"><div style="font-family:Archivo,sans-serif;font-weight:700;font-size:14.5px;letter-spacing:-.01em;line-height:1.15;">VegaCarne M. Rodríguez</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#84806F;margin-top:6px;text-transform:uppercase;">Cárnico · Orihuela</div></div>
+    <div style="border-right:1px solid rgba(23,25,26,.14);border-bottom:1px solid rgba(23,25,26,.14);padding:20px 18px;display:flex;flex-direction:column;justify-content:center;"><div style="font-family:Archivo,sans-serif;font-weight:700;font-size:14.5px;letter-spacing:-.01em;line-height:1.15;">Kuzbass Alimentación</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#84806F;margin-top:6px;text-transform:uppercase;">Alimentación · Benidorm</div></div>
+    <div style="border-right:1px solid rgba(23,25,26,.14);border-bottom:1px solid rgba(23,25,26,.14);padding:20px 18px;display:flex;flex-direction:column;justify-content:center;"><div style="font-family:Archivo,sans-serif;font-weight:700;font-size:14.5px;letter-spacing:-.01em;line-height:1.15;">Monolith Alimentación</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#84806F;margin-top:6px;text-transform:uppercase;">Distribución · La Nucía</div></div>
+    <div style="border-right:1px solid rgba(23,25,26,.14);border-bottom:1px solid rgba(23,25,26,.14);padding:20px 18px;display:flex;flex-direction:column;justify-content:center;"><div style="font-family:Archivo,sans-serif;font-weight:700;font-size:14.5px;letter-spacing:-.01em;line-height:1.15;">Res. Inmaculada Concepción</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#84806F;margin-top:6px;text-transform:uppercase;">Socio-sanitario · Torrevieja</div></div>
+    <div style="border-right:1px solid rgba(23,25,26,.14);border-bottom:1px solid rgba(23,25,26,.14);padding:20px 18px;display:flex;flex-direction:column;justify-content:center;"><div style="font-family:Archivo,sans-serif;font-weight:700;font-size:14.5px;letter-spacing:-.01em;line-height:1.15;">Fund. San José Obrero</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#84806F;margin-top:6px;text-transform:uppercase;">Institucional · Orihuela</div></div>
+  </div>
+  <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#84806F;margin-top:14px;letter-spacing:.03em;">// Muestra representativa de la cartera activa — sustituible por logotipos oficiales en la versión final.</p>
+  <div style="position:absolute;bottom:20px;right:24px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#84806F;letter-spacing:.05em;">09 / 10</div>
+</section>
 
-  <div class="cups-box">
+<!-- PAGE 8 — CONTACTO -->
+<section class="page" style="background:#17191A;color:#E7E4DB;display:flex;flex-direction:column;justify-content:space-between;padding:52px 60px;font-family:Inter,sans-serif;position:relative;">
+  <div style="display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:end;flex:1;">
     <div>
-      <div class="cups-label">CUPS del punto de suministro</div>
-      ES0021000037089262WB
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#D8A65B;font-weight:500;display:inline-flex;align-items:center;gap:10px;"><span style="width:26px;height:1px;background:currentColor;opacity:.7;"></span>Hablemos</div>
+      <p style="font-family:Archivo,sans-serif;font-weight:600;font-size:30px;line-height:1.2;letter-spacing:-.02em;color:#E7E4DB;margin-top:20px;">No somos un consultor más; somos tu <span style="color:#D8A65B;">partner estratégico.</span></p>
     </div>
-    <div class="cups-provider">Gana Energía (Gaolania Servicios S.L.)</div>
-  </div>
-
-  <h2 class="section-title">Datos del Suministro</h2>
-  <div class="data-strip">
-    <div class="ds-item">
-      <span class="ds-label">Titular</span>
-      <span class="ds-value">Mª Cristina Ramírez Díaz</span>
-      <span class="ds-sub">NIF 74235262W · Guardamar del Segura</span>
-    </div>
-    <div class="ds-sep"></div>
-    <div class="ds-item">
-      <span class="ds-label">Compañía actual</span>
-      <span class="ds-value">Gana Energía</span>
-      <span class="ds-sub">Precio por tramos P1/P2/P3</span>
-    </div>
-    <div class="ds-sep"></div>
-    <div class="ds-item">
-      <span class="ds-label">Tarifa / Potencia</span>
-      <span class="ds-value">2.0TD · 5,75 kW</span>
-      <span class="ds-sub">P1 y P2 a 5,75 kW contratados</span>
-    </div>
-    <div class="ds-sep"></div>
-    <div class="ds-item">
-      <span class="ds-label">Periodo analizado</span>
-      <span class="ds-value">61 kWh · 30 días</span>
-      <span class="ds-sub">Factura N_26002008433 · 19/04–18/05/2026</span>
-    </div>
-  </div>
-
-  <h2 class="section-title">Consumo por Periodo — Factura N_26002008433</h2>
-  <div class="chart-wrap">
-    <div class="chart-title">Distribución de consumo por periodo horario (kWh · 30 días)</div>
-    <div class="chart-bars">
-      <!-- max: 48 kWh → 84px | escala: 84/48 = 1,75 -->
-      <div class="bar-col">
-        <div class="bar-value">4 kWh</div>
-        <div class="bar-fill bar-p1" style="height:7px;width:80%;"></div>
-        <div class="bar-label">P1 · Punta</div>
-        <div class="bar-kwh">0,193 €/kWh</div>
-      </div>
-      <div class="bar-col">
-        <div class="bar-value">9 kWh</div>
-        <div class="bar-fill bar-p2" style="height:16px;width:80%;"></div>
-        <div class="bar-label">P2 · Llano</div>
-        <div class="bar-kwh">0,126 €/kWh</div>
-      </div>
-      <div class="bar-col">
-        <div class="bar-value">48 kWh</div>
-        <div class="bar-fill bar-p3" style="height:84px;width:80%;"></div>
-        <div class="bar-label">P3 · Valle</div>
-        <div class="bar-kwh">0,102 €/kWh</div>
-      </div>
-    </div>
-    <div class="chart-note">
-      El <strong style="color:var(--green);">78,7% del consumo se concentra en P3 (Valle)</strong>, el periodo de menor coste.
-      La propuesta de Ingedás aplica precios diferenciados <strong>P1 0,159 · P2 0,129 · P3 0,099 €/kWh</strong>
-      y reduce el término de potencia de <strong>0,089434 a 0,079 €/kW·día</strong>.
-    </div>
-  </div>
-
-  <h2 class="section-title">Comparativa de Tarifas · 30 días</h2>
-  <div class="comp-grid">
-
-    <div class="comp-col cur">
-      <div class="comp-head">Factura Actual
-        <div class="comp-brand">Gana Energía · Tramos P1/P2/P3</div>
-      </div>
-      <div class="comp-body">
-        <div class="comp-sec">Potencia · 30 días · 5,75 kW</div>
-        <div class="comp-row"><span class="p">P1</span><span class="r">5,75 kW · 0,089434 €/kW·día</span><span class="a">15,43 €</span></div>
-        <div class="comp-row"><span class="p">P2</span><span class="r">5,75 kW · 0,089434 €/kW·día</span><span class="a">15,43 €</span></div>
-        <div class="comp-sub"><span>Subtotal Potencia</span><span>30,85 €</span></div>
-        <div class="comp-sec">Energía · precio por tramos</div>
-        <div class="comp-row"><span class="p">P1</span><span class="r">4 kWh · 0,193 €/kWh</span><span class="a">0,77 €</span></div>
-        <div class="comp-row"><span class="p">P2</span><span class="r">9 kWh · 0,126 €/kWh</span><span class="a">1,13 €</span></div>
-        <div class="comp-row"><span class="p">P3</span><span class="r">48 kWh · 0,102 €/kWh</span><span class="a">4,90 €</span></div>
-        <div class="comp-sub"><span>Subtotal Energía</span><span>6,80 €</span></div>
-        <div class="comp-sec">Otros</div>
-        <div class="comp-xrow"><span>Alquiler de contador</span><span>0,80 €</span></div>
-        <div class="comp-xrow"><span>Bono social</span><span>0,57 €</span></div>
-        <div class="comp-xrow"><span>Imp. eléctrico (0,5%)</span><span>0,20 €</span></div>
-        <div class="comp-xrow total"><span>Base Imponible</span><span>39,22 €</span></div>
-        <div class="comp-xrow"><span>IVA (10%)</span><span>3,92 €</span></div>
-      </div>
-      <div class="comp-total"><span>Total Periodo</span><span>43,14 €</span></div>
-    </div>
-
-    <div class="comp-col prop">
-      <div class="comp-head">Propuesta Ingedás — Tramos
-        <div class="comp-brand">Precio diferenciado P1/P2/P3 · Sin coste de servicio</div>
-      </div>
-      <div class="comp-body">
-        <div class="comp-sec">Potencia · 30 días · 5,75 kW</div>
-        <div class="comp-row"><span class="p">P1</span><span class="r">5,75 kW · 0,079 €/kW·día</span><span class="a">13,63 €</span></div>
-        <div class="comp-row"><span class="p">P2</span><span class="r">5,75 kW · 0,079 €/kW·día</span><span class="a">13,63 €</span></div>
-        <div class="comp-sub"><span>Subtotal Potencia</span><span>27,25 €</span></div>
-        <div class="comp-sec">Energía · precio diferenciado por periodo</div>
-        <div class="comp-row"><span class="p">P1</span><span class="r">4 kWh · 0,159 €/kWh</span><span class="a">0,64 €</span></div>
-        <div class="comp-row"><span class="p">P2</span><span class="r">9 kWh · 0,129 €/kWh</span><span class="a">1,16 €</span></div>
-        <div class="comp-row"><span class="p">P3</span><span class="r">48 kWh · 0,099 €/kWh</span><span class="a">4,75 €</span></div>
-        <div class="comp-sub"><span>Subtotal Energía</span><span>6,55 €</span></div>
-        <div class="comp-sec">Otros</div>
-        <div class="comp-xrow"><span>Alquiler de contador</span><span>0,80 €</span></div>
-        <div class="comp-xrow"><span>Bono social</span><span>0,57 €</span></div>
-        <div class="comp-xrow"><span>Imp. eléctrico (0,5%)</span><span>0,18 €</span></div>
-        <div class="comp-xrow good"><span>✓ Sin coste de servicio</span><span>—</span></div>
-        <div class="comp-xrow total"><span>Base Imponible</span><span>35,35 €</span></div>
-        <div class="comp-xrow"><span>IVA (10%)</span><span>3,53 €</span></div>
-      </div>
-      <div class="comp-total"><span>Total Periodo</span><span>38,88 €</span></div>
-    </div>
-
-  </div>
-
-  <p class="footnote">* Estudio realizado con la factura N_26002008433, periodo 19/04/2026 – 18/05/2026 (30 días). Propuesta Ingedás: precio de potencia 0,079 €/kW·día (P1 y P2); energía por tramos P1 0,159 · P2 0,129 · P3 0,099 €/kWh. Sin coste de servicio. Resto de conceptos aplicados en idénticas condiciones.</p>
-
-  <h2 class="section-title">Resumen del Ahorro</h2>
-  <div class="ahorro-strip">
-    <div class="ah-item">
-      <div class="ah-label">Ahorro en el periodo</div>
-      <div class="ah-value">4,26 €</div>
-      <div class="ah-sub">30 días · factura real vs. propuesta</div>
-    </div>
-    <div class="ah-item">
-      <div class="ah-label">Reducción sobre factura</div>
-      <div class="ah-value green">−9,9%</div>
-      <div class="ah-sub">43,14 € → 38,88 €</div>
-    </div>
-    <div class="ah-item">
-      <div class="ah-label">Estimación ahorro anual</div>
-      <div class="ah-value">~52 €</div>
-      <div class="ah-sub">Estimación proporcional · 12 meses</div>
-    </div>
-  </div>
-
-</div>
-<footer>
-  <span class="brand">Ingedás</span>
-  <span>administracion@ingedas.es &nbsp;·&nbsp; 626 119 254 &nbsp;·&nbsp; www.ingedas.com</span>
-  <span class="validity">Oferta válida hasta el 27/05/2026 · Estudio sin coste</span>
-</footer>
-
-
-<!-- ══════════════ PÁGINA 2 — BENFERRI ══════════════ -->
-<div class="page">
-  <div class="page-header">
-    <span class="ph-brand">Ingedás · Servicios Ingedás, S.L.</span>
-    <span>Suministro 2 de 2 · Benferri</span>
-  </div>
-
-  <div class="cups-box">
     <div>
-      <div class="cups-label">CUPS del punto de suministro</div>
-      ES0021000013542074XQ
-    </div>
-    <div class="cups-provider">Gana Energía (Gaolania Servicios S.L.)</div>
-  </div>
-
-  <h2 class="section-title">Datos del Suministro</h2>
-  <div class="data-strip">
-    <div class="ds-item">
-      <span class="ds-label">Titular</span>
-      <span class="ds-value">Mª Cristina Ramírez Díaz</span>
-      <span class="ds-sub">NIF 74235262W · Benferri, Alicante</span>
-    </div>
-    <div class="ds-sep"></div>
-    <div class="ds-item">
-      <span class="ds-label">Compañía actual</span>
-      <span class="ds-value">Gana Energía</span>
-      <span class="ds-sub">Precio por tramos P1/P2/P3</span>
-    </div>
-    <div class="ds-sep"></div>
-    <div class="ds-item">
-      <span class="ds-label">Tarifa / Potencia</span>
-      <span class="ds-value">2.0TD · 5,75 kW</span>
-      <span class="ds-sub">P1 y P2 a 5,75 kW contratados</span>
-    </div>
-    <div class="ds-sep"></div>
-    <div class="ds-item">
-      <span class="ds-label">Periodo analizado</span>
-      <span class="ds-value">377 kWh · 31 días</span>
-      <span class="ds-sub">Factura N_26001658848 · 26/03–25/04/2026</span>
+      <h4 style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#C98A34;margin:0 0 16px;">Contacto</h4>
+      <a href="https://www.ingedas.com" style="display:block;font-size:16px;padding:10px 0;color:#E7E4DB;text-decoration:none;">www.ingedas.com</a>
+      <a href="mailto:administracion@ingedas.com" style="display:block;font-size:16px;padding:10px 0;border-top:1px solid rgba(231,228,219,.16);color:#E7E4DB;text-decoration:none;">administracion@ingedas.com</a>
+      <a href="tel:+34626119254" style="display:block;font-size:16px;padding:10px 0;border-top:1px solid rgba(231,228,219,.16);color:#E7E4DB;text-decoration:none;">626 119 254</a>
     </div>
   </div>
-
-  <h2 class="section-title">Consumo por Periodo — Factura N_26001658848</h2>
-  <div class="chart-wrap">
-    <div class="chart-title">Distribución de consumo por periodo horario (kWh · 31 días)</div>
-    <div class="chart-bars">
-      <!-- max: 146 kWh → 84px | escala: 84/146 = 0,575 -->
-      <div class="bar-col">
-        <div class="bar-value">146 kWh</div>
-        <div class="bar-fill bar-p1" style="height:84px;width:80%;"></div>
-        <div class="bar-label">P1 · Punta</div>
-        <div class="bar-kwh">0,193 €/kWh</div>
-      </div>
-      <div class="bar-col">
-        <div class="bar-value">89 kWh</div>
-        <div class="bar-fill bar-p2" style="height:51px;width:80%;"></div>
-        <div class="bar-label">P2 · Llano</div>
-        <div class="bar-kwh">0,126 €/kWh</div>
-      </div>
-      <div class="bar-col">
-        <div class="bar-value">142 kWh</div>
-        <div class="bar-fill bar-p3" style="height:82px;width:80%;"></div>
-        <div class="bar-label">P3 · Valle</div>
-        <div class="bar-kwh">0,102 €/kWh</div>
-      </div>
-    </div>
-    <div class="chart-note">
-      Consumo distribuido entre los tres periodos: P1 38,7% · P2 23,6% · P3 37,7%.
-      La propuesta de Ingedás aplica <strong>precio fijo único 0,119 €/kWh</strong> en todos los periodos
-      y reduce el término de potencia de <strong>0,089434 a 0,079 €/kW·día</strong>, generando ahorro directo en ambos conceptos.
-    </div>
+  <div style="max-width:100%;padding-top:20px;border-top:1px solid rgba(231,228,219,.16);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9AA0A0;letter-spacing:.06em;text-transform:uppercase;flex-wrap:wrap;gap:12px;">
+    <span>Servicios Ingedás, S.L.</span>
+    <span>Gestión inteligente de tu energía</span>
+    <span>Orihuela · Alicante · 2026</span>
   </div>
+  <div style="position:absolute;bottom:20px;right:24px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9AA0A0;letter-spacing:.05em;">10 / 10</div>
+</section>
 
-  <h2 class="section-title">Comparativa de Tarifas · 31 días</h2>
-  <div class="comp-grid">
-
-    <div class="comp-col cur">
-      <div class="comp-head">Factura Actual
-        <div class="comp-brand">Gana Energía · Tramos P1/P2/P3</div>
-      </div>
-      <div class="comp-body">
-        <div class="comp-sec">Potencia · 31 días · 5,75 kW</div>
-        <div class="comp-row"><span class="p">P1</span><span class="r">5,75 kW · 0,089434 €/kW·día</span><span class="a">15,94 €</span></div>
-        <div class="comp-row"><span class="p">P2</span><span class="r">5,75 kW · 0,089434 €/kW·día</span><span class="a">15,94 €</span></div>
-        <div class="comp-sub"><span>Subtotal Potencia</span><span>31,88 €</span></div>
-        <div class="comp-sec">Energía · precio por tramos</div>
-        <div class="comp-row"><span class="p">P1</span><span class="r">146 kWh · 0,193 €/kWh</span><span class="a">28,18 €</span></div>
-        <div class="comp-row"><span class="p">P2</span><span class="r">89 kWh · 0,126 €/kWh</span><span class="a">11,21 €</span></div>
-        <div class="comp-row"><span class="p">P3</span><span class="r">142 kWh · 0,102 €/kWh</span><span class="a">14,48 €</span></div>
-        <div class="comp-sub"><span>Subtotal Energía</span><span>53,88 €</span></div>
-        <div class="comp-sec">Otros</div>
-        <div class="comp-xrow"><span>Alquiler de contador</span><span>0,83 €</span></div>
-        <div class="comp-xrow"><span>Bono social</span><span>0,59 €</span></div>
-        <div class="comp-xrow"><span>Imp. eléctrico (0,5%)</span><span>0,44 €</span></div>
-        <div class="comp-xrow total"><span>Base Imponible</span><span>87,62 €</span></div>
-        <div class="comp-xrow"><span>IVA (10%)</span><span>8,76 €</span></div>
-      </div>
-      <div class="comp-total"><span>Total Periodo</span><span>96,38 €</span></div>
-    </div>
-
-    <div class="comp-col prop">
-      <div class="comp-head">Propuesta Ingedás — Precio Fijo
-        <div class="comp-brand">0,119 €/kWh precio único · Sin coste de servicio</div>
-      </div>
-      <div class="comp-body">
-        <div class="comp-sec">Potencia · 31 días · 5,75 kW</div>
-        <div class="comp-row"><span class="p">P1</span><span class="r">5,75 kW · 0,079 €/kW·día</span><span class="a">14,08 €</span></div>
-        <div class="comp-row"><span class="p">P2</span><span class="r">5,75 kW · 0,079 €/kW·día</span><span class="a">14,08 €</span></div>
-        <div class="comp-sub"><span>Subtotal Potencia</span><span>28,16 €</span></div>
-        <div class="comp-sec">Energía · precio fijo único</div>
-        <div class="comp-row"><span class="p">P1</span><span class="r">146 kWh · 0,119 €/kWh</span><span class="a">17,37 €</span></div>
-        <div class="comp-row"><span class="p">P2</span><span class="r">89 kWh · 0,119 €/kWh</span><span class="a">10,59 €</span></div>
-        <div class="comp-row"><span class="p">P3</span><span class="r">142 kWh · 0,119 €/kWh</span><span class="a">16,90 €</span></div>
-        <div class="comp-sub"><span>Subtotal Energía</span><span>44,86 €</span></div>
-        <div class="comp-sec">Otros</div>
-        <div class="comp-xrow"><span>Alquiler de contador</span><span>0,83 €</span></div>
-        <div class="comp-xrow"><span>Bono social</span><span>0,59 €</span></div>
-        <div class="comp-xrow"><span>Imp. eléctrico (0,5%)</span><span>0,37 €</span></div>
-        <div class="comp-xrow good"><span>✓ Sin coste de servicio</span><span>—</span></div>
-        <div class="comp-xrow total"><span>Base Imponible</span><span>74,82 €</span></div>
-        <div class="comp-xrow"><span>IVA (10%)</span><span>7,48 €</span></div>
-      </div>
-      <div class="comp-total"><span>Total Periodo</span><span>82,30 €</span></div>
-    </div>
-
-  </div>
-
-  <p class="footnote">* Estudio realizado con la factura N_26001658848, periodo 26/03/2026 – 25/04/2026 (31 días). Propuesta Ingedás: precio de potencia 0,079 €/kW·día (P1 y P2); energía precio fijo único 0,119 €/kWh. Sin coste de servicio. Resto de conceptos aplicados en idénticas condiciones.</p>
-
-  <h2 class="section-title">Resumen del Ahorro</h2>
-  <div class="ahorro-strip">
-    <div class="ah-item">
-      <div class="ah-label">Ahorro en el periodo</div>
-      <div class="ah-value">14,08 €</div>
-      <div class="ah-sub">31 días · factura real vs. propuesta</div>
-    </div>
-    <div class="ah-item">
-      <div class="ah-label">Reducción sobre factura</div>
-      <div class="ah-value green">−14,6%</div>
-      <div class="ah-sub">96,38 € → 82,30 €</div>
-    </div>
-    <div class="ah-item">
-      <div class="ah-label">Estimación ahorro anual</div>
-      <div class="ah-value">~166 €</div>
-      <div class="ah-sub">Estimación proporcional · 12 meses</div>
-    </div>
-  </div>
-
-</div>
-<footer>
-  <span class="brand">Ingedás</span>
-  <span>administracion@ingedas.es &nbsp;·&nbsp; 626 119 254 &nbsp;·&nbsp; www.ingedas.com</span>
-  <span class="validity">Oferta válida hasta el 27/05/2026 · Estudio sin coste</span>
-</footer>
-
+</doc-page>
+</x-dc>
 </body>
 </html>
