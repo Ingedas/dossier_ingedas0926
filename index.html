@@ -1,28 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
-</head>
-<body>
-<x-dc>
-<helmet>
-  <link rel="preconnect" href="https://fonts.googleapis.com"></link>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true"></link>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"></link>
+<title>Ingedas &mdash; Dossier corporativo 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     body{margin:0;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
     *{box-sizing:border-box;}
     a{color:#14231F;}
     a:hover{color:#14231F;}
-    doc-page:not(:defined){visibility:hidden;}
+    .doc{max-width:1280px;margin:0 auto;}
+    .page{width:100%;}
+    .page + .page{border-top:1px solid rgba(0,0,0,.08);}
+    @media print{
+      .page{page-break-after:always;}
+    }
   </style>
-  <script src="./doc-page.js"></script>
-</helmet>
-
-<doc-page size="a4" orientation="landscape">
-
+</head>
+<body>
+<main class="doc">
 <!-- PAGE 1 — HERO -->
 <section class="page" data-screen-label="01" style="background:#F4F1EA;color:#14231F;display:flex;flex-direction:column;justify-content:space-between;padding:56px 64px;font-family:'Instrument Sans',sans-serif;position:relative;border-top:12px solid #FCDB50;">
   <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;">
@@ -297,28 +296,6 @@
   </div>
   <div style="position:absolute;bottom:22px;right:26px;font-family:'DM Mono',monospace;font-size:11px;color:#AFB6A0;letter-spacing:.06em;">10 / 10</div>
 </section>
-
-</doc-page>
-</x-dc>
-<script type="text/x-dc" data-dc-script>
-class Component extends DCLogic {
-  componentDidMount() {
-    let tries = 0;
-    const kick = () => {
-      const dp = document.querySelector('doc-page');
-      if ((!dp || !dp.querySelector(':scope > .page')) && tries++ < 120) {
-        requestAnimationFrame(kick);
-        return;
-      }
-      if (!dp) return;
-      const probe = document.createElement('span');
-      probe.style.display = 'none';
-      dp.appendChild(probe);
-      requestAnimationFrame(() => probe.remove());
-    };
-    requestAnimationFrame(kick);
-  }
-}
-</script>
+</main>
 </body>
 </html>
